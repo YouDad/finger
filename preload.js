@@ -16,4 +16,5 @@ window.addEventListener('DOMContentLoaded', () => {
 	window.$ = require("jquery");
 	window.jQuery = window.$;
 	require("bootstrap");
+	window.Vue = require("vue/dist/vue.js");
 });

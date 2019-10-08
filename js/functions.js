@@ -9,9 +9,6 @@ function load_html_modules(url) {
 }
 
 function now_dir() {
-	let js = document.scripts;
-	let url = js[js.length - 1].baseURI;
-	return url.substring(0, url.lastIndexOf("/") + 1);
 }
 
 window.addEventListener('DOMContentLoaded', () => {
