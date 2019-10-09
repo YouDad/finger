@@ -4,21 +4,20 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
-	<script src="../js/header/bauds.js" type="text/javascript"></script>
-	<script src="../js/header/devices.js" type="text/javascript"></script>
-	<script src="../js/header.js" type="text/javascript"></script>
 </head>
 
 <body>
 	<luwh_header id="header"></luwh_header>
-	<script>
-		let devicess = [];
-		window.addEventListener('DOMContentLoaded', () => {
-			var vm = new Vue({
-				el: "#header",
-			});
-		});
-	</script>
+    <script src="../js/functions.js" type="text/javascript"></script>
+    <script>
+        $loadjs("../js/header/");
+        $wait("luwh_header", function(){
+            console.log("a");
+            var vm = new Vue({
+                el: "#header",
+            });
+        });
+    </script>
 </body>
 
 </html>

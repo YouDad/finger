@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', () => {
+{
     let template = `
         <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     let methods = {
         click_baud: function (e) {
-            now_baud = $(e.target).text() + '<span class="caret"></span>';
+            this.now_baud = $(e.target).text();
         },
     };
 
@@ -29,4 +29,4 @@ window.addEventListener('DOMContentLoaded', () => {
         data: data,
         methods: methods,
     });
-});
+}
