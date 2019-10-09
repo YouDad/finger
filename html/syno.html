@@ -2,19 +2,24 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="../css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
 </head>
 
 <body>
-	<luwh_header id="header"></luwh_header>
+    <luwh_sidebar></luwh_sidebar>
+    <luwh_header></luwh_header>
     <script src="../js/functions.js" type="text/javascript"></script>
     <script>
-        $loadjs("../js/header/");
-        $wait("luwh_header", function(){
+        $loadjs("js/sidebar");
+        $loadjs("js/header");
+        $wait("luwh_header", function () {
             console.log("a");
             var vm = new Vue({
-                el: "#header",
+                el: "luwh_header",
+            });
+            var vm2 = new Vue({
+                el: "luwh_sidebar"
             });
         });
     </script>

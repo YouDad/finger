@@ -2,6 +2,9 @@
 // It has the same sandbox as a Chrome extension.
 
 window.fs = require('fs');
+window.os = require('os');
+window.path_join = require('path').join;
+window.__project = __dirname;
 window.addEventListener('DOMContentLoaded', () => {
 	const replaceText = (selector, text) => {
 		const element = document.getElementById(selector);
