@@ -27,8 +27,8 @@
 
             },
             is_connected: false,
-            address: "",
-            password: "",
+            address: "FFFFFFFF",
+            password: "00000000",
             port: null,
         }
     };
@@ -37,8 +37,8 @@
         connect: async function (e) {
             let that = this;
             let data = {};
-            await $bus.request("get_baud", data);
-            await $bus.request("get_device", data);
+            await $bus.$emit("get_baud", data);
+            await $bus.$emit("get_device", data);
 
             port = new serial_port(data.device, {
                 baudRate: parseInt(data.baud),
@@ -52,15 +52,15 @@
             });
             port.on("open", async function () {
                 console.log(`open: ${port.path}`);
-                $procedure.load("syno.vfy_pwd").exec(port);
+                await $procedure.load("syno.vfy_pwd").exec(port);
             });
             port.on("close", function () {
                 console.log(`close: ${port.path}`);
 
             });
-            port.on("data", function (a) {
+            port.on("data", async function (a) {
                 console.log(`data: ${port.path}`, a);
-                $procedure.exec(a);
+                await $procedure.exec(a);
             })
 
             that.is_connected = true;
@@ -75,6 +75,15 @@
         template: template,
         data: data_css,
         methods: methods,
+        created: function () {
+            let that = this;
+            $bus.$on("get_address", function (data) {
+                data.address = that.address;
+            });
+            $bus.$on("get_password", function (data) {
+                data.password = that.password;
+            });
+        },
         mounted: function () {
             // 加载默认值
         },

@@ -8,10 +8,12 @@ window.$procedure = {
     },
     load: function (name, start_step = "begin") {
         if (!name || !this.procedures[name]) {
-            console.log(`error: load procedure ${name} failed. because no such procedure.`);
+            console.error(`load procedure ${name} failed. because no such procedure.`);
+            return;
         }
         if (!start_step || !this.procedures[name][start_step]) {
-            console.log(`error: load procedure ${name} failed. because no start_step:${start_step}.`);
+            console.error(`load procedure ${name} failed. because no start_step:${start_step}.`);
+            return;
         }
 
         this.now_step = start_step;
@@ -26,7 +28,7 @@ window.$procedure = {
         this.now_procedure = null;
         return $procedure;
     },
-    exec: function (data) {
+    exec: async function (data) {
         if (!this.now_procedure) {
             console.error("exec procedure failed. because no availiable procedure.");
             return;
@@ -35,7 +37,7 @@ window.$procedure = {
             console.warn(`next procedure failed. ${this.now_procedure}["${this.now_step}"] is null, cannot be called.`);
         }
 
-        this.now_procedure[this.now_step](data);
+        await this.now_procedure[this.now_step](data);
         return $procedure;
     },
     next: function (step) {

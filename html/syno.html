@@ -16,13 +16,14 @@
         $loadjs("js/sidebar");
         $loadjs("js/header");
         $loadjs("js/procedure");
-        $loadjs("js/event_bus");
+        $loadjs("js/converter");
         let dependencies = [
             'window.Vue',
+            'window.$bus',
             'window.Vue.options["components"]["luwh_sidebar"]',
             'window.Vue.options["components"]["luwh_header"]',
             'window.$procedure',
-            'window.$bus',
+            'window.$syno',
         ];
         $wait(dependencies, function () {
             var vm = new Vue({

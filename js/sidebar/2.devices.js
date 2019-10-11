@@ -63,7 +63,7 @@
         methods: methods,
         created: function () {
             let that = this;
-            $bus.response("get_device", function (data) {
+            $bus.$on("get_device", function (data) {
                 data.device = that.now_device.split(" ")[0];
             });
         },

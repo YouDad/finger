@@ -31,7 +31,7 @@
         methods: methods,
         created: function () {
             let that = this;
-            $bus.response("get_baud", function (data) {
+            $bus.$on("get_baud", function (data) {
                 data.baud = that.now_baud;
             });
         },
