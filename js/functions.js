@@ -1,8 +1,17 @@
-function $wait(component_name, func) {
-    interval_id = setInterval(function () {
-        if (window.Vue.options["components"][component_name] !== undefined) {
+function $wait(names, func) {
+    let interval_id = setInterval(function () {
+        if (names instanceof Array) {
+            let ret = false;
+            for (name of names) {
+                eval(`if(${name} === undefined) ret = true;`);
+                if (ret) {
+                    return;
+                }
+            }
             clearInterval(interval_id);
             func && func.call();
+        } else {
+            console.log("error: $wait names is not Array")
         }
     }, 100);
 }

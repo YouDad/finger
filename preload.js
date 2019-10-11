@@ -16,7 +16,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		replaceText(`${type}-version`, process.versions[type]);
 	}
 
-	window.serial = require("serialport");
+	window.serial_port = require("serialport");
 	window.$ = require("jquery");
 	window.jQuery = window.$;
 	require("bootstrap");

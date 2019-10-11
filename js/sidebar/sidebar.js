@@ -18,7 +18,6 @@
             css_luwh_sidebar: {
                 'position': 'absolute',
                 'background': "#333",
-                'width': "15em",
                 'height': '100%',
             },
         }
@@ -33,7 +32,7 @@
         data: data_css,
         methods: methods,
         mounted: function () {
-            
+
         },
     });
 }

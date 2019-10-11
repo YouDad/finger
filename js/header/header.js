@@ -9,7 +9,6 @@
         return {
             css_luwh_header: {
                 'position': 'relative',
-                'margin-left': '15.1em',
             },
         }
     };

@@ -7,19 +7,34 @@
 </head>
 
 <body>
-    <luwh_sidebar></luwh_sidebar>
-    <luwh_header></luwh_header>
+    <div id="vue">
+        <luwh_sidebar :style="css_luwh_sidebar"></luwh_sidebar>
+        <luwh_header :style="css_luwh_header"></luwh_header>
+    </div>
     <script src="../js/functions.js" type="text/javascript"></script>
     <script>
         $loadjs("js/sidebar");
         $loadjs("js/header");
-        $wait("luwh_header", function () {
-            console.log("a");
+        $loadjs("js/procedure");
+        $loadjs("js/event_bus");
+        let dependencies = [
+            'window.Vue',
+            'window.Vue.options["components"]["luwh_sidebar"]',
+            'window.Vue.options["components"]["luwh_header"]',
+            'window.$procedure',
+            'window.$bus',
+        ];
+        $wait(dependencies, function () {
             var vm = new Vue({
-                el: "luwh_header",
-            });
-            var vm2 = new Vue({
-                el: "luwh_sidebar"
+                el: "#vue",
+                data: {
+                    css_luwh_sidebar: {
+                        'width': '20em',
+                    },
+                    css_luwh_header: {
+                        'margin-left': '20.1em',
+                    },
+                }
             });
         });
     </script>
