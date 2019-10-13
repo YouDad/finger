@@ -10,32 +10,66 @@
     <div id="vue">
         <luwh_sidebar :style="css_luwh_sidebar"></luwh_sidebar>
         <luwh_header :style="css_luwh_header"></luwh_header>
+        <div :style="css_content">
+            <luwh_devinfo class="hide" :style="css_luwh_devinfo"></luwh_devinfo>
+            <luwh_finger :style="css_luwh_finger"></luwh_finger>
+            <luwh_image :style="css_luwh_image"></luwh_image>
+            <luwh_log :style="css_luwh_log"></luwh_log>
+        </div>
     </div>
+    
     <script src="../js/functions.js" type="text/javascript"></script>
     <script>
+        $loadjs("js/framework");
+        $loadjs("js/modules");
         $loadjs("js/sidebar");
-        $loadjs("js/header");
-        $loadjs("js/procedure");
-        $loadjs("js/converter");
+        $loadjs("js/finger");
         let dependencies = [
-            'window.Vue',
-            'window.$bus',
             'window.Vue.options["components"]["luwh_sidebar"]',
             'window.Vue.options["components"]["luwh_header"]',
-            'window.$procedure',
-            'window.$syno',
+            'window.Vue.options["components"]["luwh_devinfo"]',
+            'window.Vue.options["components"]["luwh_finger"]',
+            'window.Vue.options["components"]["luwh_image"]',
         ];
         $wait(dependencies, function () {
             var vm = new Vue({
                 el: "#vue",
                 data: {
                     css_luwh_sidebar: {
+                        'position': 'absolute',
+                        'background': "#333",
+                        'height': '100%',
                         'width': '20em',
                     },
                     css_luwh_header: {
+                        'position': 'relative',
                         'margin-left': '20.1em',
                     },
-                }
+                    css_content: {
+                        'position': 'relative',
+                        'margin-left': '20.1em',
+                    },
+                    css_luwh_devinfo: {
+                        // 'left': '20em',
+                        // 'right': '0',
+                        // 'position': 'absolute',
+                    },
+                    css_luwh_finger: {
+                        // 'top': '20em',
+                        // 'left': '20em',
+                        // 'right': '0',
+                        // 'position': 'absolute',
+                    },
+                    css_luwh_image: {
+                        // 'top': '22em',
+                        // 'left': '20em',
+                        // 'right': '0',
+                        // 'position': 'absolute',
+                    },
+                    css_luwh_log:{
+
+                    },
+                },
             });
         });
     </script>

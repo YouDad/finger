@@ -1,6 +1,6 @@
 {
     let template = `
-        <div :style="css_luwh_sidebar" class="nav nav-pills nav-stacked">
+        <div class="nav nav-pills nav-stacked">
             <luwh_bauds></luwh_bauds>
             <luwh_devices></luwh_devices>
 
@@ -13,26 +13,7 @@
         </div>
     `;
 
-    let data_css = function () {
-        return {
-            css_luwh_sidebar: {
-                'position': 'absolute',
-                'background': "#333",
-                'height': '100%',
-            },
-        }
-    };
-
-    let methods = {
-        _: function () {
-        },
-    };
     Vue.component('luwh_sidebar', {
         template: template,
-        data: data_css,
-        methods: methods,
-        mounted: function () {
-
-        },
     });
 }

@@ -29,44 +29,26 @@
             is_connected: false,
             address: "FFFFFFFF",
             password: "00000000",
-            port: null,
         }
     };
 
     let methods = {
         connect: async function (e) {
             let that = this;
-            let data = {};
+            let data = {
+                func: async function () {
+                    await $procedure.load("$syno.vfy_pwd").exec();
+                }
+            };
             await $bus.$emit("get_baud", data);
             await $bus.$emit("get_device", data);
 
-            port = new serial_port(data.device, {
-                baudRate: parseInt(data.baud),
-            });
-            port.on("error", function (err) {
-                console.error(`error: ${err.message}`);
-            });
-            port.on("disconnect", function () {
-                console.log(`disconnect: ${port.path}`);
-
-            });
-            port.on("open", async function () {
-                console.log(`open: ${port.path}`);
-                await $procedure.load("syno.vfy_pwd").exec(port);
-            });
-            port.on("close", function () {
-                console.log(`close: ${port.path}`);
-
-            });
-            port.on("data", async function (a) {
-                console.log(`data: ${port.path}`, a);
-                await $procedure.exec(a);
-            })
-
+            $port.open(data);
             that.is_connected = true;
         },
         disconnect: function (e) {
             let that = this;
+            $port.close();
             that.is_connected = false;
         },
     };

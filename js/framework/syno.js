@@ -27,7 +27,7 @@
                 //get size
                 let ret = [];
                 let size = 256;
-                size -= _package_header_length;
+                size -= this._package_header_length;
                 for (let i = 0; i < data.length / size; i++) {
                     ret.push(data.slice(i * size, i * size + size));
                 }
@@ -71,18 +71,43 @@
                 retval: 0,
                 data: [],
             };
+            let sign = 0;
+            let len = 0;
 
-            ret.addr += (datas[2] < 16 ? "0" : "") + datas[2].toString(16);
+            ret.addr = (datas[2] < 16 ? "0" : "") + datas[2].toString(16);
             ret.addr += (datas[3] < 16 ? "0" : "") + datas[3].toString(16);
             ret.addr += (datas[4] < 16 ? "0" : "") + datas[4].toString(16);
             ret.addr += (datas[5] < 16 ? "0" : "") + datas[5].toString(16);
 
-            ret.retval = data_package[9];
+            while (datas.length) {
+                if (datas[0] != 0xef || datas[1] != 0x01) {
+                    console.error("$syno.parse failed, not EF01");
+                    throw "$syno.parse failed, not EF01";
+                }
 
-            for (let i = 0; i < datas.length - _package_header_length; i++) {
-                data.push(datas[10 + i]);
+                sign = datas[6];
+                len = datas[7] * 256 + datas[8];
+
+                for (let i = 0; i < len - 2; i++) {
+                    ret.data.push(datas[i + 9]);
+                }
+                // TODO: checksum
+
+                if (
+                    !(
+                        (sign == 0x07) ||
+                        ((datas.length - len - 9) && sign == 0x01) ||
+                        ((datas.length - len - 9) && sign == 0x02) ||
+                        (!(datas.length - len - 9) && sign == 0x08)
+                    )
+                ) {
+                    console.warn("sign is not right.", datas, sign, ret);
+                }
+
+                datas = datas.slice(len + 9);
             }
 
+            ret.retval = ret.data.shift();
             return ret;
         },
         explain: function (retval) {

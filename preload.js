@@ -8,6 +8,7 @@ window.__project = __dirname;
 window.serial_port = require("serialport");
 window.Vue = require("vue/dist/vue.js");
 window.$bus = new Vue();
+window.$canvas = require('canvas');
 window.addEventListener('DOMContentLoaded', () => {
 	window.$ = require("jquery");
 	window.jQuery = window.$;
