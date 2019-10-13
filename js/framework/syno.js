@@ -33,17 +33,17 @@
                 }
                 return ret;
             } else {
-                console.error("$syno.split need a Array");
+                $log("$syno.split need a Array", "error");
             }
         },
         convert: function (cmd) {
             //addr,sign,data
             if (cmd.addr === undefined)
-                console.error("$syno.convert addr is undefind");
+                $log("$syno.convert addr is undefind", "error");
             if (cmd.sign === undefined)
-                console.error("$syno.convert sign is undefind");
+                $log("$syno.convert sign is undefind", "error");
             if (cmd.data === undefined)
-                console.error("$syno.convert data is undefind");
+                $log("$syno.convert data is undefind", "error");
 
             let data_package = [0xEF, 0x01];
             data_package.push(parseInt(cmd.addr.slice(0, 2), 16));
@@ -81,7 +81,7 @@
 
             while (datas.length) {
                 if (datas[0] != 0xef || datas[1] != 0x01) {
-                    console.error("$syno.parse failed, not EF01");
+                    $log("$syno.parse failed, not EF01", "error");
                     throw "$syno.parse failed, not EF01";
                 }
 
@@ -101,7 +101,7 @@
                         (!(datas.length - len - 9) && sign == 0x08)
                     )
                 ) {
-                    console.warn("sign is not right.", datas, sign, ret);
+                    $log(`sign is not right. ${datas}, ${sign}, ${ret}`, "warn");
                 }
 
                 datas = datas.slice(len + 9);

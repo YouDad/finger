@@ -1,13 +1,13 @@
 {
     let template = `
         <div :style="css_luwh_devinfo">
-            <button class="list-group-item" :style="css_button" @click="change_info">
+            <button class="list-group-item" :style="css_button" @click="show_now++;">
                 查看另外的信息
             </button>
             <button class="list-group-item" @click="flash_devinfo">
                 刷新硬件信息
             </button>
-            <div v-show="show_now==0">
+            <div v-show="show_now%4==0">
                 <ul class="list-group">
                     <li class="list-group-item">1 指纹库大小: {{DataBaseSize}}</li>
                     <li class="list-group-item">2 安全等级: {{SecurLevel}}</li>
@@ -15,7 +15,7 @@
                     <li class="list-group-item">4 波特率系数: {{CFG_BaudRate}}</li>
                 </ul>
             </div>
-            <div v-show="show_now==1">
+            <div v-show="show_now%4==1">
                 <ul class="list-group">
                     <li class="list-group-item">5 产品型号: {{ProductSN}}</li>
                     <li class="list-group-item">6 软件版本: {{SoftwareVersion}}</li>
@@ -23,7 +23,7 @@
                     <li class="list-group-item">8 传感器名称: {{SensorName}}</li>
                 </ul>
             </div>
-            <div v-show="show_now==2">
+            <div v-show="show_now%4==2">
                 <ul class="list-group">
                 <li class="list-group-item">9 状态寄存器: {{SSR}}</li>
                 <li class="list-group-item">10 传感器类型: {{SensorType}}</li>
@@ -31,7 +31,7 @@
                 <li class="list-group-item">12 密码: {{PassWord}}</li>
                 </ul>
             </div>
-            <div v-show="show_now==3">
+            <div v-show="show_now%4==3">
                 <ul class="list-group">
                 <li class="list-group-item">13 Jtag锁定标志: {{JtagLockFlag}}</li>
                 <li class="list-group-item">14 传感器初始化程序入口: {{SensorInitEntry}}</li>
@@ -68,19 +68,15 @@
             let that = this;
             await $procedure.load("$syno.get_devinfo").exec();
         },
-        change_info: function (e) {
-            this.show_now++;
-            this.show_now %= 4;
-        },
         print_hex: function (a, b) {
             let str = "";
             if (this.devinfo_word.length >= 64) {
                 str = this.devinfo_word[a];
                 if (b) {
-                    str <<= 16;
+                    str *= 65536;
                     str += this.devinfo_word[b];
                 }
-                str.toString(16);
+                str = str.toString(16);
                 while (str.length < (b > 0 ? 8 : 4))
                     str = "0" + str;
                 str = "0x" + str;

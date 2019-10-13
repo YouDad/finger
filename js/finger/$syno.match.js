@@ -11,12 +11,12 @@
             $port.write(data_package);
             $procedure.next("get_image");
             if (message) {
-                console.log(message);
+                $log(message);
             }
         },
         "get_image": async function (data) {
             let result = $syno.parse(data);
-            console.log($syno.explain(result.retval));
+            $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
                 let data_package = (await $syno.request($syno.GetImage))[0];
                 $port.write(data_package);
@@ -27,7 +27,7 @@
         },
         "up_image": async function (data) {
             let result = $syno.parse(data);
-            console.log($syno.explain(result.retval));
+            $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
                 let data_package = (await $syno.request($syno.UpImage))[0];
                 $port.write(data_package);
@@ -40,7 +40,7 @@
         },
         "show_image": async function (data) {
             let result = $syno.parse(data);
-            console.log($syno.explain(result.retval));
+            $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
                 $bus.$emit("show_image", result);
 
@@ -53,7 +53,7 @@
         },
         "match": async function (data) {
             let result = $syno.parse(data);
-            console.log($syno.explain(result.retval));
+            $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
                 let data_package = (await $syno.request($syno.Match))[0];
                 $port.write(data_package);
@@ -65,9 +65,9 @@
         },
         "process_match": function (data) {
             let result = $syno.parse(data);
-            console.log($syno.explain(result.retval));
+            $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
-                console.log("分数:", result.data[0] * 256 + result.data[1]);
+                $log(`分数: ${result.data[0] * 256 + result.data[1]}`);
                 $procedure.next("end").exec();
             } else {
                 //匹配失败
@@ -77,9 +77,9 @@
         "end": function (message) {
             this.buffer_id = 1;
             if (message)
-                console.log(message);
+                $log(message);
             else
-                console.log("success");
+                $log("success");
             $procedure.kill();
         },
     };

@@ -11,7 +11,7 @@ function $wait(names, func) {
             clearInterval(interval_id);
             func && func.call();
         } else {
-            console.log("error: $wait names is not Array")
+            $log("$wait names is not Array", "error");
         }
     }, 100);
 }

@@ -39,7 +39,7 @@
             that.devices.length = 0;
             serial_port.list(function (err, ports) {
                 ports.forEach(function (port) {
-                    console.log(port);
+                    $log(port);
                     if (port.comName != undefined &&
                         port.pnpId != undefined &&
                         port.manufacturer != undefined) {

@@ -17,7 +17,7 @@
         },
         "process_vfy_pwd": function (data) {
             let result = $syno.parse(data);
-            console.log($syno.explain(result.retval));
+            $log($syno.explain(result.retval));
             // TODO: 处理接收到密码的事件
             $procedure.kill();
             $procedure.load("$syno.get_devinfo").exec();

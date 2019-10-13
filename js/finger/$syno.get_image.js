@@ -7,7 +7,7 @@
         },
         "process_get_image": async function (data) {
             let result = $syno.parse(data);
-            console.log($syno.explain(result.retval));
+            $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
                 let data_package = (await $syno.request($syno.UpImage))[0];
                 $port.write(data_package);
@@ -18,7 +18,7 @@
         },
         "show_image": function (data) {
             let result = $syno.parse(data);
-            console.log($syno.explain(result.retval));
+            $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
                 $bus.$emit("show_image", result);
             }

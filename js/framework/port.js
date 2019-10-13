@@ -9,18 +9,18 @@
                 baudRate: parseInt(data.baud),
             });
             that.port.on("error", function (err) {
-                console.error(`$port.error: ${err.message}`);
+                $log(`$port.error: ${err.message}`, "error");
             });
             that.port.on("disconnect", function () {
-                console.log(`$port.disconnect: ${that.port.path}`);
+                $log(`$port.disconnect: ${that.port.path}`);
 
             });
             that.port.on("open", async function () {
-                console.log(`$port.open: ${that.port.path}`);
+                $log(`$port.open: ${that.port.path}`);
                 await data.func();
             });
             that.port.on("close", function () {
-                console.log(`$port.close: ${that.port.path}`);
+                $log(`$port.close: ${that.port.path}`);
 
             });
             that.port.on("data", async function (a) {

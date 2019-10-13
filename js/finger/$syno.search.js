@@ -5,12 +5,12 @@
             $port.write(data_package);
             $procedure.next("up_image");
             if (message) {
-                console.log(message);
+                $log(message);
             }
         },
         "up_image": async function (data) {
             let result = $syno.parse(data);
-            console.log($syno.explain(result.retval));
+            $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
                 let data_package = (await $syno.request($syno.UpImage))[0];
                 $port.write(data_package);
@@ -21,7 +21,7 @@
         },
         "show_image": async function (data) {
             let result = $syno.parse(data);
-            console.log($syno.explain(result.retval));
+            $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
                 $bus.$emit("show_image", result);
 
@@ -34,7 +34,7 @@
         },
         "search": async function (data) {
             let result = $syno.parse(data);
-            console.log($syno.explain(result.retval));
+            $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
                 let dbsize = {};
                 await $bus.$emit("get_dbsize", dbsize);
@@ -52,10 +52,10 @@
         },
         "process_match": function (data) {
             let result = $syno.parse(data);
-            console.log($syno.explain(result.retval));
+            $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
-                console.log("第" + (result.data[0] * 256 + result.data[1]) + "个");
-                console.log("分数:" + (result.data[2] * 256 + result.data[3]));
+                $log(`第${(result.data[0] * 256 + result.data[1])}个`);
+                $log(`分数: ${(result.data[2] * 256 + result.data[3])}`);
                 $procedure.next("end").exec();
             } else {
                 //匹配失败
@@ -65,9 +65,9 @@
         "end": function (message) {
             this.buffer_id = 1;
             if (message)
-                console.log(message);
+                $log(message);
             else
-                console.log("success");
+                $log("success");
             $procedure.kill();
         },
     };

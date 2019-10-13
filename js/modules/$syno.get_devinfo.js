@@ -7,8 +7,8 @@
         },
         "parse_data": function (data) {
             let result = $syno.parse(data);
-            console.log($syno.explain(result.retval));
-            console.log(result);
+            $log($syno.explain(result.retval));
+            $log(result);
             $bus.$emit("set_devinfo", result);
             $procedure.kill();
         },
