@@ -1,7 +1,7 @@
 {
     let template = `
         <div>
-            <button class="btn btn-default" @click="match">比对</button>
+            <button class="btn btn-default btn-block" @click="match">比对</button>
         </div>
     `;
 

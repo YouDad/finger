@@ -1,6 +1,6 @@
 {
     let template = `
-        <div>
+        <div :style="css_div">
             <ul class="list-group" :style="css_list_limited">
                 <li class="list-group-item list-group-item-success">
                     <span class="badge">14</span>
@@ -23,7 +23,14 @@
             css_list_limited: {
                 'max-height': '10em',
                 'overflow': 'auto',
-            }
+            },
+            css_div: {
+                'width': '50em',
+                'padding': '1em',
+                'border-radius': '0.5em',
+                'border': '1em solid #d9edf7',
+                'border-width': '0.5em',
+            },
         }
     };
 

@@ -1,33 +1,42 @@
 {
     let template = `
         <div :style="css_luwh_devinfo">
-            <button class="btn btn-primary" data-toggle="collapse" data-target=".collapse" aria-expanded="false" aria-controls=".collapse">
-                Button with data-target
+            <button class="list-group-item" :style="css_button" @click="change_info">
+                查看另外的信息
             </button>
-            <div class="collapse show">
+            <button class="list-group-item" @click="flash_devinfo">
+                刷新硬件信息
+            </button>
+            <div v-show="show_now==0">
                 <ul class="list-group">
-                    <li class="list-group-item">指纹库大小: {{DataBaseSize}}</li>
-                    <li class="list-group-item">安全等级: {{SecurLevel}}</li>
-                    <li class="list-group-item">数据包大小: {{CFG_PktSize}}</li>
-                    <li class="list-group-item">波特率系数: {{CFG_BaudRate}}</li>
-                    <li class="list-group-item">产品型号: {{ProductSN}}</li>
-                    <li class="list-group-item">软件版本: {{SoftwareVersion}}</li>
-                    <li class="list-group-item">厂家名称: {{Manufacturer}}</li>
-                    <li class="list-group-item">传感器名称: {{SensorName}}</li>
-                    <button class="list-group-item" @click="flash_devinfo">刷新设备信息</button>
+                    <li class="list-group-item">1 指纹库大小: {{DataBaseSize}}</li>
+                    <li class="list-group-item">2 安全等级: {{SecurLevel}}</li>
+                    <li class="list-group-item">3 数据包大小: {{CFG_PktSize}}</li>
+                    <li class="list-group-item">4 波特率系数: {{CFG_BaudRate}}</li>
                 </ul>
             </div>
-            <div class="collapse">
+            <div v-show="show_now==1">
                 <ul class="list-group">
-                    <li class="list-group-item">状态寄存器: {{SSR}}</li>
-                    <li class="list-group-item">传感器类型: {{SensorType}}</li>
-                    <li class="list-group-item">设备地址: {{DeviceAddress}}</li>
-                    <li class="list-group-item">密码: {{PassWord}}</li>
-                    <li class="list-group-item">Jtag锁定标志: {{JtagLockFlag}}</li>
-                    <li class="list-group-item">传感器初始化程序入口: {{SensorInitEntry}}</li>
-                    <li class="list-group-item">录入图像程序入口: {{SensorGetImageEntry}}</li>
-                    <li class="list-group-item">参数表有效标志: {{ParaTableFlag}}</li>
-                    <button class="list-group-item" @click="flash_devinfo">刷新设备信息</button>
+                    <li class="list-group-item">5 产品型号: {{ProductSN}}</li>
+                    <li class="list-group-item">6 软件版本: {{SoftwareVersion}}</li>
+                    <li class="list-group-item">7 厂家名称: {{Manufacturer}}</li>
+                    <li class="list-group-item">8 传感器名称: {{SensorName}}</li>
+                </ul>
+            </div>
+            <div v-show="show_now==2">
+                <ul class="list-group">
+                <li class="list-group-item">9 状态寄存器: {{SSR}}</li>
+                <li class="list-group-item">10 传感器类型: {{SensorType}}</li>
+                <li class="list-group-item">11 设备地址: {{DeviceAddress}}</li>
+                <li class="list-group-item">12 密码: {{PassWord}}</li>
+                </ul>
+            </div>
+            <div v-show="show_now==3">
+                <ul class="list-group">
+                <li class="list-group-item">13 Jtag锁定标志: {{JtagLockFlag}}</li>
+                <li class="list-group-item">14 传感器初始化程序入口: {{SensorInitEntry}}</li>
+                <li class="list-group-item">15 录入图像程序入口: {{SensorGetImageEntry}}</li>
+                <li class="list-group-item">16 参数表有效标志: {{ParaTableFlag}}</li>
                 </ul>
             </div>
         </div>
@@ -36,10 +45,21 @@
     let data_css = function () {
         return {
             css_luwh_devinfo: {
-                '': '',
+                'width': '21em',
+                'padding': '1em',
+                'border-radius': '0.5em',
+                'border': '1em solid #d9edf7',
+                'border-width': '0.5em',
+            },
+            css_button: {
+                'position': 'absolute',
+                'margin-left': '8em',
+                'z-index': '1',
+                'width': '10em',
             },
             devinfo_word: [],
             devinfo_str: "",
+            show_now: 0,
         }
     };
 
@@ -47,6 +67,10 @@
         flash_devinfo: async function (e) {
             let that = this;
             await $procedure.load("$syno.get_devinfo").exec();
+        },
+        change_info: function (e) {
+            this.show_now++;
+            this.show_now %= 4;
         },
         print_hex: function (a, b) {
             let str = "";

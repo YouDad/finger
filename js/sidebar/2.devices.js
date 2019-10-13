@@ -1,17 +1,17 @@
 {
     let template = `
         <div>
-            <div class="dropdown" :style="css1">
-                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <div class="dropdown" :style="css_list">
+                <button class="btn btn-default btn-block  dropdown-toggle" data-toggle="dropdown">
                     设备: {{ now_device }}<span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu" style="padding:0.25em;">
                     <button class="btn btn-default btn-block"
                         v-for="device in devices"
                         @click="click_serial">{{ device.comName }} ({{device.manufacturer}})</button>
                 </ul>
             </div>
-            <button class="btn btn-primary" :style="css2"
+            <button class="btn btn-primary btn-block" :style="css_button"
                 @click="flash_serial">刷新串口列表</button>
         </div>
     `;
@@ -20,15 +20,11 @@
         return {
             now_device: "",
             devices: [],
-            css1: {
-                // 'position': 'absolute',
-                // 'left': '0',
-                // 'top': '0',
+            css_list: {
+                'padding-bottom': '0.5em',
             },
-            css2: {
-                // 'position': 'absolute',
-                // 'left': '8.5em',
-                // 'top': '0',
+            css_button: {
+
             },
         };
     };

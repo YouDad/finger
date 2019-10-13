@@ -1,10 +1,10 @@
 {
     let template = `
         <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <button class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown">
                 串口波特率: {{ now_baud }} <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" style="padding:0.25em;">
                 <button class="btn btn-default btn-block"
                     v-for="baud in bauds" v-once @click="click_baud">{{ baud }}</button>
             </ul>

@@ -1,7 +1,7 @@
 {
     let template = `
         <div>
-            <button class="btn btn-default" @click="search">搜索</button>
+            <button class="btn btn-default btn-block" @click="search">搜索</button>
         </div>
     `;
 

@@ -4,20 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/animate.css">
+    <link rel="stylesheet" href="../css/main.css">
 </head>
 
 <body>
-    <div id="vue">
+    <div id="vue" :style="css_div">
         <luwh_sidebar :style="css_luwh_sidebar"></luwh_sidebar>
         <luwh_header :style="css_luwh_header"></luwh_header>
-        <div :style="css_content">
-            <luwh_devinfo class="hide" :style="css_luwh_devinfo"></luwh_devinfo>
-            <luwh_finger :style="css_luwh_finger"></luwh_finger>
-            <luwh_image :style="css_luwh_image"></luwh_image>
-            <luwh_log :style="css_luwh_log"></luwh_log>
+        <div class="row" :style="css_content">
+            <luwh_image class="col-xs-2" :style="css_luwh_image"></luwh_image>
+            <luwh_finger class="col-xs-3" :style="css_luwh_finger"></luwh_finger>
+            <luwh_devinfo class="col-xs-2" :style="css_luwh_devinfo"></luwh_devinfo>
+            <luwh_log class="col-xs-7" :style="css_luwh_log"></luwh_log>
         </div>
     </div>
-    
+
     <script src="../js/functions.js" type="text/javascript"></script>
     <script>
         $loadjs("js/framework");
@@ -35,39 +37,45 @@
             var vm = new Vue({
                 el: "#vue",
                 data: {
+                    css_div: {
+                        'overflow-x': 'hidden',
+                        'position': 'absolute',
+                        'left': '0',
+                        'top': '0',
+                        'right': '0',
+                        'bottom': '0',
+                    },
                     css_luwh_sidebar: {
                         'position': 'absolute',
-                        'background': "#333",
-                        'height': '100%',
-                        'width': '20em',
+                        'left': '0',
+                        'top': '0',
+                        'width': '13em',
                     },
                     css_luwh_header: {
-                        'position': 'relative',
-                        'margin-left': '20.1em',
+                        'position': 'absolute',
+                        'left': '13em',
+                        'right': '0',
+                        'top': '0',
+                        'height': '3em',
                     },
                     css_content: {
-                        'position': 'relative',
-                        'margin-left': '20.1em',
+                        'position': 'absolute',
+                        'margin-left': '13em',
+                        'overflow': 'auto',
+                        'top': '3em',
+                        'border-left': '1px #ddd solid',
                     },
                     css_luwh_devinfo: {
-                        // 'left': '20em',
-                        // 'right': '0',
-                        // 'position': 'absolute',
+                        'margin': '2em',
                     },
                     css_luwh_finger: {
-                        // 'top': '20em',
-                        // 'left': '20em',
-                        // 'right': '0',
-                        // 'position': 'absolute',
+                        'margin': '2em',
                     },
                     css_luwh_image: {
-                        // 'top': '22em',
-                        // 'left': '20em',
-                        // 'right': '0',
-                        // 'position': 'absolute',
+                        'margin': '2em',
                     },
-                    css_luwh_log:{
-
+                    css_luwh_log: {
+                        'margin': '2em',
                     },
                 },
             });

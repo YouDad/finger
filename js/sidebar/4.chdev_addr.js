@@ -1,15 +1,13 @@
 {
     let template = `
-        <div :style="css_luwh_">
-        <button class="btn btn-default">luwh_chdev_addr</button>
+        <div>
+            <button class="btn btn-default btn-block">luwh_chdev_addr</button>
         </div>
     `;
 
     let data_css = function () {
         return {
-            css_luwh_: {
-
-            },
+            
         }
     };
 

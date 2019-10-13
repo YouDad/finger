@@ -1,7 +1,7 @@
 {
     let template = `
-        <div :style="css_luwh_">
-        <button class="btn btn-default">luwh_chdev_pwd</button>
+        <div>
+            <button class="btn btn-default btn-block">luwh_chdev_pwd</button>
         </div>
     `;
 

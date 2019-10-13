@@ -1,7 +1,7 @@
 {
     let template = `
         <div>
-            <button class="btn btn-default" @click="get_image">获取图像</button>
+            <button class="btn btn-default btn-block" @click="get_image">获取图像</button>
         </div>
     `;
 
