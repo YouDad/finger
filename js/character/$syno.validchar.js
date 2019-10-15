@@ -1,0 +1,48 @@
+{
+    let procedures = {
+        dbsize: 0,
+        next: 0,
+        "begin": async function () {
+            let dbsize = {};
+            await $bus.$emit("get_dbsize", dbsize);
+            this.dbsize = dbsize.dbsize;
+            this.next = 0;
+            $procedure.next("request").exec();
+        },
+        "request": async function () {
+            if (this.next * 256 >= this.dbsize) {
+                $procedure.kill();
+                return;
+            }
+            let data_package = (await $syno.request($syno.ReadIndexTable, [this.next]))[0];
+            this.next++;
+            $port.write(data_package);
+            $procedure.next("process_table");
+        },
+        "process_table": function (data) {
+            let result = $syno.parse(data);
+            $log($syno.explain(result.retval));
+            if (result.retval) {
+                $user_log(`获取有效模板列表：` + $syno.explain(result.retval),
+                    result.retval ? "error" : "info");
+            } else {
+                list = [];
+                for (let i = 0; i < 32; i++) {
+                    for (let j = 0; j < 8; j++) {
+                        if (result.data[i] & (1 << j)) {
+                            list.push(i * 8 + j);
+                        }
+                    }
+                }
+                if (list.length == 0) {
+                    $user_log("获取有效模板列表为空", "error");
+                } else {
+                    $user_log("获取有效模板列表：" + list.join(","));
+                }
+            }
+            $procedure.next("request").exec();
+        },
+    };
+
+    $procedure.define("$syno.validchar", procedures);
+}

@@ -2,7 +2,7 @@
     let template = `
         <div>
             <div class="input-group">
-                <span class="input-group-addon" id="basic-addon1">finger_id</span>
+                <span class="input-group-addon">finger_id</span>
                 <input type="text" class="form-control" placeholder="finger_id" v-model="finger_id"/>
             </div>
         </div>

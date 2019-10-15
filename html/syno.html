@@ -13,9 +13,11 @@
         <luwh_sidebar :style="css_luwh_sidebar"></luwh_sidebar>
         <luwh_header :style="css_luwh_header"></luwh_header>
         <div class="row" :style="css_content">
-            <luwh_image class="col-xs-2" :style="css_luwh_image"></luwh_image>
-            <luwh_finger class="col-xs-3" :style="css_luwh_finger"></luwh_finger>
+            <luwh_image class="col-xs-2 hide" :style="css_luwh_image"></luwh_image>
+            <luwh_finger class="col-xs-3 hide" :style="css_luwh_finger"></luwh_finger>
             <luwh_devinfo class="col-xs-2" :style="css_luwh_devinfo"></luwh_devinfo>
+            <luwh_character class="col-xs-4 hide" :style="css_luwh_character"></luwh_character>
+            <luwh_other class="col-xs-2 hide" :style="css_luwh_other"></luwh_other>
             <luwh_log class="col-xs-7" :style="css_luwh_log"></luwh_log>
         </div>
     </div>
@@ -26,6 +28,8 @@
         $loadjs("js/modules");
         $loadjs("js/sidebar");
         $loadjs("js/finger");
+        $loadjs("js/character");
+        $loadjs("js/other");
         let dependencies = [
             'window.Vue.options["components"]["luwh_sidebar"]',
             'window.Vue.options["components"]["luwh_header"]',
@@ -75,6 +79,12 @@
                         'margin': '2em',
                     },
                     css_luwh_log: {
+                        'margin': '2em',
+                    },
+                    css_luwh_other: {
+                        'margin': '2em',
+                    },
+                    css_luwh_character: {
                         'margin': '2em',
                     },
                 },

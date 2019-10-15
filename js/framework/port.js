@@ -51,6 +51,7 @@
                 $procedure.kill();
                 return;
             }
+            console.log(`$port.write: ${that.port.path}`, arr);
             that.port.write(Uint8Array.from(arr), "binary");
         },
     };

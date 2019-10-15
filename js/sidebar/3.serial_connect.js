@@ -74,6 +74,9 @@
             $bus.$on("get_password", function (data) {
                 data.password = that.password;
             });
+            $bus.$on("set_address", function (data) {
+                that.address = data.address;
+            });
         },
         mounted: function () {
             // 加载默认值
