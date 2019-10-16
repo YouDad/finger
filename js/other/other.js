@@ -1,14 +1,17 @@
 {
     let template = `
-        <div :style="css_luwh_other">
+        <div :style="css_div">
             <button class="btn btn-default" @click="get_random">获取随机数</button>
         </div>
     `;
 
     let data_css = function () {
         return {
-            css_luwh_other: {
-                '': '',
+            css_div: {
+                'width': '21em',
+                'padding': '1em',
+                'border-radius': '0.5em',
+                'border': '0.5em solid rgb(217, 237, 247)',
             },
         }
     };

@@ -10,14 +10,14 @@
 
 <body>
     <div id="vue" :style="css_div">
-        <luwh_sidebar :style="css_luwh_sidebar"></luwh_sidebar>
         <luwh_header :style="css_luwh_header"></luwh_header>
         <div class="row" :style="css_content">
-            <luwh_image class="col-xs-2 hide" :style="css_luwh_image"></luwh_image>
-            <luwh_finger class="col-xs-3 hide" :style="css_luwh_finger"></luwh_finger>
+            <luwh_image class="col-xs-2" :style="css_luwh_image"></luwh_image>
+            <luwh_finger class="col-xs-3" :style="css_luwh_finger"></luwh_finger>
+            <luwh_connect class="con-xs-2" :style="css_luwh_connect"></luwh_connect>
             <luwh_devinfo class="col-xs-2" :style="css_luwh_devinfo"></luwh_devinfo>
-            <luwh_character class="col-xs-4 hide" :style="css_luwh_character"></luwh_character>
-            <luwh_other class="col-xs-2 hide" :style="css_luwh_other"></luwh_other>
+            <luwh_character class="col-xs-4" :style="css_luwh_character"></luwh_character>
+            <luwh_other class="col-xs-2" :style="css_luwh_other"></luwh_other>
             <luwh_log class="col-xs-7" :style="css_luwh_log"></luwh_log>
         </div>
     </div>
@@ -26,12 +26,12 @@
     <script>
         $loadjs("js/framework");
         $loadjs("js/modules");
-        $loadjs("js/sidebar");
+        $loadjs("js/connect");
         $loadjs("js/finger");
         $loadjs("js/character");
         $loadjs("js/other");
         let dependencies = [
-            'window.Vue.options["components"]["luwh_sidebar"]',
+            'window.Vue.options["components"]["luwh_connect"]',
             'window.Vue.options["components"]["luwh_header"]',
             'window.Vue.options["components"]["luwh_devinfo"]',
             'window.Vue.options["components"]["luwh_finger"]',
@@ -49,25 +49,20 @@
                         'right': '0',
                         'bottom': '0',
                     },
-                    css_luwh_sidebar: {
-                        'position': 'absolute',
-                        'left': '0',
-                        'top': '0',
-                        'width': '13em',
-                    },
                     css_luwh_header: {
                         'position': 'absolute',
-                        'left': '13em',
+                        'left': '0',
                         'right': '0',
                         'top': '0',
                         'height': '3em',
                     },
                     css_content: {
                         'position': 'absolute',
-                        'margin-left': '13em',
                         'overflow': 'auto',
                         'top': '3em',
-                        'border-left': '1px #ddd solid',
+                    },
+                    css_luwh_connect: {
+                        'margin': '2em',
                     },
                     css_luwh_devinfo: {
                         'margin': '2em',
