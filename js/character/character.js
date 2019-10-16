@@ -4,6 +4,7 @@
             <button class="btn btn-danger" @click="emptychar">清空指纹库</button>
             <button class="btn btn-success" @click="validchar">获得有效指纹列表</button>
             <button class="btn btn-danger" @click="delchar">删除指纹</button>
+            <luwh_finger_map></luwh_finger_map>
         </div>
     `;
 
