@@ -78,8 +78,5 @@
                 that.address = data.address;
             });
         },
-        mounted: function () {
-            // 加载默认值
-        },
     });
 }

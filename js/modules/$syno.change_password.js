@@ -18,10 +18,10 @@
                 }
             }
             let datas = [0, 0, 0, 0];
-            datas[0] = Number(passwd.slice(0, 2));
-            datas[1] = Number(passwd.slice(2, 4));
-            datas[2] = Number(passwd.slice(4, 6));
-            datas[3] = Number(passwd.slice(6, 8));
+            datas[0] = parseInt(passwd.slice(0, 2), 16);
+            datas[1] = parseInt(passwd.slice(2, 4), 16);
+            datas[2] = parseInt(passwd.slice(4, 6), 16);
+            datas[3] = parseInt(passwd.slice(6, 8), 16);
 
             let data_package = (await $syno.request($syno.SetPwd, datas))[0];
             $port.write(data_package);

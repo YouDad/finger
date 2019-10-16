@@ -18,10 +18,10 @@
                 }
             }
             let datas = [0, 0, 0, 0];
-            datas[0] = Number(addr.slice(0, 2));
-            datas[1] = Number(addr.slice(2, 4));
-            datas[2] = Number(addr.slice(4, 6));
-            datas[3] = Number(addr.slice(6, 8));
+            datas[0] = parseInt(addr.slice(0, 2), 16);
+            datas[1] = parseInt(addr.slice(2, 4), 16);
+            datas[2] = parseInt(addr.slice(4, 6), 16);
+            datas[3] = parseInt(addr.slice(6, 8), 16);
 
             let data_package = (await $syno.request($syno.SetChipAddr, datas))[0];
             $port.write(data_package);
