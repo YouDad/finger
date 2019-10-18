@@ -35,10 +35,21 @@
                     }
                 }
                 if (list.length == 0) {
-                    $user_log("获取有效模板列表为空", "error");
+                    $user_log("获取有效模板列表为空");
                 } else {
                     $user_log("获取有效模板列表：" + list.join(","));
                 }
+
+                bool_list = [];
+                for (const i in window.range(this.dbsize)) {
+                    if (list.length && list[0] == i) {
+                        list.shift();
+                        bool_list.push(1);
+                    } else {
+                        bool_list.push(0);
+                    }
+                }
+                $bus.$emit("set_map", bool_list);
             }
             $procedure.next("request").exec();
         },

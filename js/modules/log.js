@@ -1,7 +1,7 @@
 {
     let template = `
         <div :style="css_div">
-            <div class="btn-group" role="group" aria-label="...">
+            <div class="btn-group" :style="css_nav">
                 <button type="button" class="btn btn-success" @click="log_type=0;">用户</button>
                 <button type="button" class="btn btn-warning" @click="log_type=1;">测试</button>
                 <button type="button" class="btn btn-danger" @click="log_type=2;">开发者</button>
@@ -15,26 +15,27 @@
             <ul class="list-group" :style="css_list_limited" v-show="log_type==2">
                 <li class="list-group-item" :class="log.type" v-for="log in deve_logs">{{log.message}}<span class="badge">{{now}} {{log.number}}</span></li>
             </ul>
-            <div class="progress">
+            <!--<div class="progress">
                 <div class="progress-bar progress-bar-striped active" :class="process_type" role="progressbar" :style="css_process">
                     <span class="sr-only">45% Complete</span>
                 </div>
-            </div>
+            </div>-->
         </div>
     `;
 
     let data_css = function () {
         return {
             css_list_limited: {
-                'height': '10em',
+                'height': '13.5em',
                 'overflow': 'auto',
+                'border': '0.5em solid #d9edf7',
             },
             css_div: {
                 'width': '50em',
                 'padding': '1em',
-                'border-radius': '0.5em',
-                'border': '1em solid #d9edf7',
-                'border-width': '0.5em',
+            },
+            css_nav: {
+                'border': '0.5em solid #d9edf7',
             },
             process_type: "progress-bar-info",
             log_type: 0,
@@ -60,10 +61,10 @@
         created: function () {
             let that = this;
             $bus.$on("log", function (log) {
-                if (log.process) {
-                    that.css_process.width = log.process * 100 + "%";
-                    return;
-                }
+                // if (log.process) {
+                //     that.css_process.width = log.process * 100 + "%";
+                //     return;
+                // }
 
                 let logs;
                 if (!log.type) {
@@ -143,6 +144,7 @@
     }
 
     function $process(process) {
+        return;
         $bus.$emit("log", {
             process: process,
         });

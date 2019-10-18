@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/tooltip.css">
     <link rel="stylesheet" href="../css/animate.css">
     <link rel="stylesheet" href="../css/main.css">
 </head>
@@ -12,13 +13,13 @@
     <div id="vue" :style="css_div">
         <luwh_header :style="css_luwh_header"></luwh_header>
         <div class="row" :style="css_content">
-            <luwh_image class="col-xs-2 hide" :style="css_luwh_image"></luwh_image>
-            <luwh_finger class="col-xs-3 hide" :style="css_luwh_finger"></luwh_finger>
-            <luwh_connect class="con-xs-2" :style="css_luwh_connect"></luwh_connect>
-            <luwh_devinfo class="col-xs-2 hide" :style="css_luwh_devinfo"></luwh_devinfo>
-            <luwh_character class="col-xs-4" :style="css_luwh_character"></luwh_character>
-            <luwh_other class="col-xs-2 hide" :style="css_luwh_other"></luwh_other>
-            <luwh_log class="col-xs-7" :style="css_luwh_log"></luwh_log>
+            <luwh_image class="col-xs-2" :style="css_luwh_image"></luwh_image>
+            <luwh_connect id="a" class="con-xs-3" :style="css_luwh_connect"></luwh_connect>
+            <luwh_finger class="col-xs-3" :style="css_luwh_finger"></luwh_finger>
+            <luwh_character class="col-xs-3" :style="css_luwh_character"></luwh_character>
+            <luwh_other class="col-xs-3" :style="css_luwh_other"></luwh_other>
+            <luwh_devinfo class="col-xs-3" :style="css_luwh_devinfo"></luwh_devinfo>
+            <luwh_log class="col-xs-10" :style="css_luwh_log"></luwh_log>
         </div>
     </div>
 
@@ -36,12 +37,15 @@
             'window.Vue.options["components"]["luwh_devinfo"]',
             'window.Vue.options["components"]["luwh_finger"]',
             'window.Vue.options["components"]["luwh_image"]',
+            'window.Vue.options["components"]["luwh_character"]',
+            'window.Vue.options["components"]["luwh_other"]',
         ];
         $wait(dependencies, function () {
             var vm = new Vue({
                 el: "#vue",
                 data: {
                     css_div: {
+                        '-webkit-user-select': 'none',
                         'overflow-x': 'hidden',
                         'position': 'absolute',
                         'left': '0',
@@ -60,27 +64,64 @@
                         'position': 'absolute',
                         'overflow': 'auto',
                         'top': '3em',
+                        'left': '0em',
+                        'right': '0em',
+                        'bottom': '0em',
+                    },
+
+
+                    css_luwh_image: {
+                        'position': 'absolute',
+                        'margin': '2em',
+                        'left': '0em',
+                        'top': '0em',
+
+                        'width': '21em',
+                        'height': '21em',
                     },
                     css_luwh_connect: {
+                        'position': 'absolute',
                         'margin': '2em',
-                    },
-                    css_luwh_devinfo: {
-                        'margin': '2em',
+                        'left': '0em',
+                        'top': '23em',
+                        
+                        'width': '21em',
                     },
                     css_luwh_finger: {
+                        'position': 'absolute',
                         'margin': '2em',
-                    },
-                    css_luwh_image: {
-                        'margin': '2em',
-                    },
-                    css_luwh_log: {
-                        'margin': '2em',
-                    },
-                    css_luwh_other: {
-                        'margin': '2em',
+                        'left': '23em',
+                        'top': '0em',
                     },
                     css_luwh_character: {
+                        'position': 'absolute',
                         'margin': '2em',
+                        'left': '23em',
+                        'top': '11em',
+
+                        'width': '23em',
+                    },
+                    css_luwh_other: {
+                        'position': 'absolute',
+                        'margin': '2em', 
+                        'left': '50em',
+                        'top': '0em',
+
+                        'width': '23em',
+                    },
+                    css_luwh_devinfo: {
+                        'position': 'absolute',
+                        'margin': '2em',
+                        'left': '52em',
+                        'top': '12em',
+                    },
+                    css_luwh_log: {
+                        'position': 'absolute',
+                        'margin': '2em',
+                        'left': '22em',
+                        'top': '27em',
+
+                        'width': '52em',
                     },
                 },
             });

@@ -1,3 +1,97 @@
 html, body {
     height: 100%;
 }
+
+.list-group {
+    margin-bottom: 0;
+}
+
+span {
+    display: inline;
+    white-space: pre;
+}
+
+.hex, .text {
+    display: inline-block;
+}
+
+.text span, .hex span {
+    font-family: Consolas, Menlo, PT Mono, Liberation Mono, monospace;
+    font-size: 16px;
+    line-height: 20px;
+    cursor: default;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+.hex>span {
+    padding: 1px 4px;
+    border-right: 1px solid transparent;
+}
+
+.hex>span:nth-child(16n):after {
+    content: "\A";
+    margin: 0 -5.3px 0 5px;
+}
+
+.hex>span:nth-child(8n) {
+    border-right-color: #ccc;
+}
+
+.hex>span:nth-child(16n) {
+    border-right-color: transparent;
+}
+
+.hex>span:nth-child(2n) {
+    color: #555;
+}
+
+.text>span {
+    padding: 1px 0;
+}
+
+.text>span:nth-child(16n):after {
+    content: "\A";
+}
+
+.text {
+    margin-left: 1em;
+}
+
+span.blink {
+    box-shadow: inset 0 -4px 0 -2px rgba(0, 0, 0, .5);
+}
+
+span.cursor {
+    background: #6b9aba;
+    color: #fff!important;
+}
+
+span.selection {
+    background: #bfeeff;
+}
+
+span.edited {
+    background: #ffeebf;
+}
+
+span.selection.edited {
+    background: #e9eed5;
+}
+
+span.edited.cursor {
+    background: #d1a645;
+}
+
+span.selection.cursor {
+    background: #95c4dc;
+}
+
+span:hover {
+    background: #dae4ea;
+}
+
+span.selection:hover {
+    background: #cde9f4;
+}

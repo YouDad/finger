@@ -2,7 +2,7 @@
     let template = `
         <div>
             <div class="input-group">
-                <span class="input-group-addon">finger_id</span>
+                <span class="input-group-addon">指纹ID</span>
                 <input type="text" class="form-control" placeholder="finger_id" v-model="finger_id"/>
             </div>
         </div>
@@ -19,9 +19,8 @@
         data: data,
         created: function () {
             let that = this;
-            $bus.$on("get_finger_id", function (finger_id) {
-                finger_id.finger_id = that.finger_id;
-            });
+            $bus.$on("get_finger_id", (finger_id) => finger_id.finger_id = that.finger_id);
+            $bus.$on("set_finger_id", (finger_id) => that.finger_id = finger_id.finger_id);
         },
     });
 }

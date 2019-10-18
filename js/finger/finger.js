@@ -34,7 +34,6 @@
                 'margin-top': '3.5em',
             },
             css_luwh_search: {
-                // 'position': 'absolute',
                 'margin-left': '14em',
                 'width': '6em',
                 'margin-top': '3.5em',
@@ -42,8 +41,7 @@
             css_div: {
                 'width': '23em',
                 'padding': '1em',
-                'border-radius': '0.5em',
-                'border': '1em solid #d9edf7',
+                'border': '0.5em solid #d9edf7',
                 'border-width': '0.5em',
             },
         };

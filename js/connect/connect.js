@@ -13,7 +13,6 @@
             css_div: {
                 'width': '21em',
                 'padding': '1em',
-                'border-radius': '0.5em',
                 'border': '0.5em solid #d9edf7',
                 'display': 'inline-block',
             },
