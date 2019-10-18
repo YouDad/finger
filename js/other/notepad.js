@@ -22,7 +22,7 @@
                             </div>
                         </div>
                         <div class="modal-body">
-                            <div class="editor" style="width: 47em;display:inline-block;">
+                            <div class="editor" style="width: 50em;display:inline-block;">
                                 
                                 <div class="hex">
                                     <span v-for="(char, i) in text" :class="css_span(i)" @mousedown="mousedown(i, $event)" @keydown="keydown_hex"
@@ -50,7 +50,7 @@
                 'opacity': '1',
             },
             css_dialog: {
-                'width': '70em',
+                'width': '50em',
                 'top': '21%',
             },
             css_process: {
@@ -60,7 +60,7 @@
                 'margin-bottom': '-0.75em',
             },
             notepad_id: 0,
-            text: [],
+            text: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
             down: null,
             down_selection: null,
             move: null,
