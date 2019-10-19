@@ -40,14 +40,16 @@
         },
         close: function () {
             let that = this;
-            if (that.port.message == "undefined") {
+            if (that.port.message === "undefined") {
+                $user_log("串口未打开，关闭失败", "error");
                 return;
             }
             that.port.close();
         },
         write: function (arr) {
             let that = this;
-            if (that.port.message == "undefined") {
+            if (that.port.message === "undefined") {
+                $user_log("串口未打开，写入失败", "error");
                 $procedure.kill();
                 return;
             }

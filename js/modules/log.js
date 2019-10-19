@@ -87,7 +87,7 @@
                     if (logs.length > 0 && log.message == logs[logs.length - 1].message) {
                         logs[logs.length - 1].number++;
                     } else {
-                        log.number = 0;
+                        log.number = 1;
                         logs.push(log);
                     }
                 }

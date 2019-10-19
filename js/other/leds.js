@@ -14,11 +14,13 @@
 
             },
             leds: [false, false, false, false],
+            backup: null,
         }
     };
 
     let methods = {
         btn_click: function (i) {
+            this.backup=this.leds;
             this.$set(this.leds, i, !this.leds[i]);
         },
     };
@@ -35,7 +37,7 @@
         methods: methods,
         watch: watch,
         created: function () {
-
+            $bus.$on("leds_back", ()=>this.leds=this.backup);
         },
         mounted: function () {
 

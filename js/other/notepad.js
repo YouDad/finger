@@ -4,7 +4,7 @@
             <!-- Button trigger notepad_modal -->
             <button class="btn btn-default" data-toggle="modal"
                 data-target="#notepad_modal">读写记事本</button>
-            
+
             <!-- notepad_modal -->
             <div class="modal fade" id="notepad_modal" :style="css_notepad_modal">
                 <div class="modal-dialog" :style="css_dialog">
@@ -23,7 +23,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="editor" style="width: 50em;display:inline-block;">
-                                
+
                                 <div class="hex">
                                     <span v-for="(char, i) in text" :class="css_span(i)" @mousedown="mousedown(i, $event)" @keydown="keydown_hex"
                                         tabindex="1" @mouseup="mouseup(i)" @mousemove="mousemove(i, $event)" @click="click(i)"><!--
@@ -60,7 +60,7 @@
                 'margin-bottom': '-0.75em',
             },
             notepad_id: 0,
-            text: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+            text: [],
             down: null,
             down_selection: null,
             move: null,
