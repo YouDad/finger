@@ -16,7 +16,6 @@
             <luwh_image class="col-xs-2" :style="css_luwh_image"></luwh_image>
             <luwh_connect id="a" class="con-xs-3" :style="css_luwh_connect"></luwh_connect>
             <luwh_finger class="col-xs-3" :style="css_luwh_finger"></luwh_finger>
-            <luwh_character class="col-xs-3" :style="css_luwh_character"></luwh_character>
             <luwh_other class="col-xs-3" :style="css_luwh_other"></luwh_other>
             <luwh_devinfo class="col-xs-3" :style="css_luwh_devinfo"></luwh_devinfo>
             <luwh_log class="col-xs-10" :style="css_luwh_log"></luwh_log>
@@ -29,7 +28,6 @@
         $loadjs("js/modules");
         $loadjs("js/connect");
         $loadjs("js/finger");
-        $loadjs("js/character");
         $loadjs("js/other");
         let dependencies = [
             'window.Vue.options["components"]["luwh_connect"]',
@@ -37,7 +35,6 @@
             'window.Vue.options["components"]["luwh_devinfo"]',
             'window.Vue.options["components"]["luwh_finger"]',
             'window.Vue.options["components"]["luwh_image"]',
-            'window.Vue.options["components"]["luwh_character"]',
             'window.Vue.options["components"]["luwh_other"]',
         ];
         $wait(dependencies, function () {
@@ -77,15 +74,16 @@
                         'top': '0em',
 
                         'width': '21em',
-                        'height': '21em',
+                        'height': '23em',
                     },
                     css_luwh_connect: {
                         'position': 'absolute',
                         'margin': '2em',
                         'left': '0em',
-                        'top': '23em',
+                        'top': '24em',
                         
                         'width': '21em',
+                        'height': '21em',
                     },
                     css_luwh_finger: {
                         'position': 'absolute',

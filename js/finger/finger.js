@@ -6,6 +6,8 @@
             <luwh_enroll :style="css_luwh_enroll"></luwh_enroll>
             <luwh_match :style="css_luwh_match"></luwh_match>
             <luwh_search :style="css_luwh_search"></luwh_search>
+            <luwh_character :style="css_luwh_character"></luwh_character>
+            <luwh_finger_map :style="css_map"></luwh_finger_map>
         </div>
     `;
 
@@ -43,6 +45,12 @@
                 'padding': '1em',
                 'border': '0.5em solid #d9edf7',
                 'border-width': '0.5em',
+            },
+            css_luwh_character: {
+
+            },
+            css_map: {
+                'margin-top': '0.5em',
             },
         };
     };
