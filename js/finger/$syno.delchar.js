@@ -18,6 +18,7 @@
             $user_log(`删除指纹${this.finger_id}：` + $syno.explain(result.retval),
                 result.retval ? "error" : "info");
             $procedure.kill();
+            $procedure.load('$syno.validchar').exec();
         },
     };
 

@@ -140,6 +140,7 @@
             $procedure.kill();
 
             $process(1);
+            $procedure.load('$syno.validchar').exec();
         }
     };
 

@@ -11,6 +11,7 @@
             $user_log("清空模板库：" + $syno.explain(result.retval),
                 result.retval ? "error" : "info");
             $procedure.kill();
+            $procedure.load('$syno.validchar').exec();
         },
     };
 

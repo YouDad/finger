@@ -1,5 +1,6 @@
 {
     let procedures = {
+        interval_id: null,
         "begin": async function () {
             let password = {};
             await $bus.$emit("get_password", password);
@@ -14,13 +15,31 @@
             let data_package = (await $syno.request($syno.VfyPwd, datas))[0];
             $port.write(data_package);
             $procedure.next("process_vfy_pwd");
+            this.interval_id = setInterval(() => {
+                clearInterval(this.interval_id);
+                $procedure.exec();
+            }, 1000);
         },
         "process_vfy_pwd": function (data) {
-            let result = $syno.parse(data);
-            $log($syno.explain(result.retval));
-            // TODO: 处理接收到密码的事件
+            if (data === undefined) {
+                clearInterval(this.interval_id);
+                let message = "验证密码超时";
+                $user_log(message);
+                $bus.$emit("notify.danger", message);
+            } else {
+                let result = $syno.parse(data);
+                $log($syno.explain(result.retval));
+                let message = "验证密码：" + $syno.explain(result.retval);
+                if (result.retval) {
+                    $user_log(message);
+                    $bus.$emit("notify.danger", message);
+                } else {
+                    $bus.$emit("notify.success", message);
+                    $procedure.add("$syno.get_devinfo");
+                    $procedure.add('$syno.validchar');
+                }
+            }
             $procedure.kill();
-            $procedure.load("$syno.get_devinfo").exec();
         },
     };
 

@@ -11,8 +11,8 @@
                 <input type="text" class="form-control"
                 placeholder="8个16进制数" v-model="password">
             </div>
-            <button class="btn btn-primary btn-block" @click="connect" v-show="!is_connected" :style="css_button">连接设备!</button>
-            <button class="btn btn-danger btn-block" @click="disconnect" v-show="is_connected" :style="css_button">断开连接!</button>
+            <button class="btn btn-primary btn-block" @click="connect" v-if="!is_connected" :style="css_button">连接设备!</button>
+            <button class="btn btn-danger btn-block" @click="disconnect" v-if="is_connected" :style="css_button">断开连接!</button>
         </div>
     `;
 
@@ -67,16 +67,10 @@
         data: data_css,
         methods: methods,
         created: function () {
-            let that = this;
-            $bus.$on("get_address", function (data) {
-                data.address = that.address;
-            });
-            $bus.$on("get_password", function (data) {
-                data.password = that.password;
-            });
-            $bus.$on("set_address", function (data) {
-                that.address = data.address;
-            });
+            $bus.$on("get_address", data => data.address = this.address);
+            $bus.$on("get_password", data => data.password = this.password);
+            $bus.$on("set_address", data => this.address = data.address);
+            $bus.$on("connect_failed", data => this.is_connected = false);
         },
     });
 }

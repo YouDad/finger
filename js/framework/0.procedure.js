@@ -2,6 +2,7 @@ window.$procedure = {
     procedures: {},
     now_step: "",
     now_procedure: null,
+    work_queue: [],
     define: function (name, name_func_map) {
         this.procedures[name] = name_func_map;
         return $procedure;
@@ -26,6 +27,11 @@ window.$procedure = {
         }
 
         this.now_procedure = null;
+
+        if (this.work_queue.length) {
+            let name = this.work_queue.shift();
+            $procedure.load(name).exec();
+        }
         return $procedure;
     },
     exec: async function (data) {
@@ -51,5 +57,8 @@ window.$procedure = {
 
         this.now_step = step;
         return $procedure;
-    }
+    },
+    add: function (name) {
+        this.work_queue.push(name);
+    },
 };
