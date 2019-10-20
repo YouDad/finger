@@ -51,6 +51,7 @@
             },
             css_notepad_modal: {
                 'opacity': '1',
+                'background': 'rgba(1,1,1,0.5)',
             },
             css_dialog: {
                 'width': '50em',

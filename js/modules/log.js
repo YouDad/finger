@@ -36,6 +36,7 @@
             },
             css_nav: {
                 'border': '0.5em solid #d9edf7',
+                'margin-left': '36.57em',
             },
             process_type: "progress-bar-info",
             log_type: 0,

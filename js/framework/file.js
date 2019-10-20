@@ -2,8 +2,7 @@
     let procedures = {
         fs: window.fs,
         os: window.os,
-        join: window.path_join,
-        dir_path: join(os.tmpdir(), "finger"),
+        dir_path: window.path_join(os.tmpdir(), "finger"),
         "begin": function () {
             let that = this;
             this.fs.exists(this.dir_path, function (exists) {
