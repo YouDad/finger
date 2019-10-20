@@ -1,6 +1,10 @@
 {
     let procedures = {
+        continued: false,
         "begin": async function (message) {
+            if (message === true) {
+                this.continued = true;
+            }
             let finger_id = {};
             await $bus.$emit("get_finger_id", finger_id);
             finger_id = finger_id.finger_id;
@@ -80,7 +84,11 @@
                 $log(message);
             else
                 $log("success");
-            $procedure.kill();
+            if (this.continued) {
+                $procedure.next("begin").exec();
+            } else {
+                $procedure.kill();
+            }
         },
     };
 

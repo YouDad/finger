@@ -1,6 +1,10 @@
 {
     let procedures = {
+        continued: false,
         "begin": async function (message) {
+            if (message === true) {
+                this.continued = true;
+            }
             let data_package = (await $syno.request($syno.GetImage))[0];
             $port.write(data_package);
             $procedure.next("up_image");
@@ -68,7 +72,11 @@
                 $log(message);
             else
                 $log("success");
-            $procedure.kill();
+            if (this.continued) {
+                $procedure.next("begin").exec();
+            } else {
+                $procedure.kill();
+            }
         },
     };
 

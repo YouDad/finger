@@ -1,6 +1,10 @@
 {
     let procedures = {
-        "begin": async function () {
+        continued: false,
+        "begin": async function (continued) {
+            if (continued === true) {
+                this.continued = true;
+            }
             let data_package = (await $syno.request($syno.GetImage))[0];
             $port.write(data_package);
             $procedure.next("process_get_image");
@@ -22,7 +26,11 @@
             if (result.retval == 0x00) {
                 $bus.$emit("show_image", result);
             }
-            $procedure.kill();
+            if (this.continued) {
+                $procedure.next("begin").exec();
+            } else {
+                $procedure.kill();
+            }
         },
     };
 

@@ -1,8 +1,8 @@
 {
     let template = `
-        <div>
+        <div style="display: inline-table;">
             <!-- Button trigger notepad_modal -->
-            <button class="btn btn-default" data-toggle="modal"
+            <button class="btn btn-default" data-toggle="modal" :style="css_button"
                 data-target="#notepad_modal">读写记事本</button>
 
             <!-- notepad_modal -->
@@ -46,6 +46,9 @@
 
     let data_css = function () {
         return {
+            css_button: {
+                'display': 'inline-table',
+            },
             css_notepad_modal: {
                 'opacity': '1',
             },
