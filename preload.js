@@ -3,6 +3,7 @@
 
 window.fs = require('fs');
 window.os = require('os');
+window.moment = require('moment');
 window.path_join = require('path').join;
 window.__project = __dirname;
 window.serial_port = require("serialport");

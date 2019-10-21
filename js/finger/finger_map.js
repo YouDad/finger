@@ -78,6 +78,7 @@
             }
         },
         set_finger_id: function (finger_id) {
+            let that = this;
             $bus.$emit("set_finger_id", { finger_id });
         },
         range: function (start, end) {
