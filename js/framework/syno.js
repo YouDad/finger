@@ -33,17 +33,17 @@
                 }
                 return ret;
             } else {
-                $log("$syno.split need a Array", "error");
+                $log("$syno.split need a Array", "danger");
             }
         },
         convert: function (cmd) {
             //addr,sign,data
             if (cmd.addr === undefined)
-                $log("$syno.convert addr is undefind", "error");
+                $log("$syno.convert addr is undefind", "danger");
             if (cmd.sign === undefined)
-                $log("$syno.convert sign is undefind", "error");
+                $log("$syno.convert sign is undefind", "danger");
             if (cmd.data === undefined)
-                $log("$syno.convert data is undefind", "error");
+                $log("$syno.convert data is undefind", "danger");
 
             let data_package = [0xEF, 0x01];
             data_package.push(parseInt(cmd.addr.slice(0, 2), 16));
@@ -66,6 +66,10 @@
             return data_package;
         },
         parse: function (datas) {
+            if (datas === undefined) {
+                throw "";
+            }
+
             let ret = {
                 addr: "",
                 retval: 0,
@@ -74,14 +78,14 @@
             let sign = 0;
             let len = 0;
 
-            ret.addr = (datas[2] < 16 ? "0" : "") + datas[2].toString(16);
+            ret.addr += (datas[2] < 16 ? "0" : "") + datas[2].toString(16);
             ret.addr += (datas[3] < 16 ? "0" : "") + datas[3].toString(16);
             ret.addr += (datas[4] < 16 ? "0" : "") + datas[4].toString(16);
             ret.addr += (datas[5] < 16 ? "0" : "") + datas[5].toString(16);
 
             while (datas.length) {
                 if (datas[0] != 0xef || datas[1] != 0x01) {
-                    $log("$syno.parse failed, not EF01", "error");
+                    $log("$syno.parse failed, not EF01", "danger");
                     throw "$syno.parse failed, not EF01";
                 }
 
@@ -101,7 +105,7 @@
                         (!(datas.length - len - 9) && sign == 0x08)
                     )
                 ) {
-                    $log(`sign is not right. ${datas}, ${sign}, ${ret}`, "warn");
+                    $log(`sign is not right. ${datas}, ${sign}, ${ret}`, "warning");
                 }
 
                 datas = datas.slice(len + 9);

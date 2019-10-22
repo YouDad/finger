@@ -15,11 +15,6 @@
             <ul class="list-group" :style="css_list_limited" v-show="log_type==2">
                 <li class="list-group-item" :class="log.type" v-for="log in deve_logs">{{log.message}}<span class="badge">{{now}} {{log.number}}</span></li>
             </ul>
-            <!--<div class="progress">
-                <div class="progress-bar progress-bar-striped active" :class="process_type" role="progressbar" :style="css_process">
-                    <span class="sr-only">45% Complete</span>
-                </div>
-            </div>-->
         </div>
     `;
 
@@ -40,9 +35,6 @@
             },
             process_type: "progress-bar-info",
             log_type: 0,
-            css_process: {
-                'width': '0%'
-            },
             user_logs: [],
             test_logs: [],
             deve_logs: [],
@@ -62,23 +54,20 @@
         created: function () {
             let that = this;
             $bus.$on("log", function (log) {
-                // if (log.process) {
-                //     that.css_process.width = log.process * 100 + "%";
-                //     return;
-                // }
-
                 let logs;
-                if (!log.type) {
-                    log.type = "info";
-                }
                 switch (log.type) {
-                    case "info": log.type = "info"; break;
-                    case "warn": log.type = "warning"; break;
-                    case "error": log.type = "danger"; break;
-                    case "success": log.type = "success"; break;
+                    case "info":
+                    case "warning":
+                    case "danger":
+                    case "success":
+                        break;
+                    default:
+                        console.error("log type error " + log.type);
+                        return;
                 }
+                that.process_type = "progress-bar-" + log.type;
                 switch (log.level) {
-                    case 0: logs = that.user_logs; that.process_type = "progress-bar-" + log.type; break;
+                    case 0: logs = that.user_logs; break;
                     case 1: logs = that.test_logs; break;
                     case 2: logs = that.deve_logs; break;
                 }
@@ -96,58 +85,33 @@
         },
         mounted: function () {
             $(".list-group").bind("DOMNodeInserted", function (e) {
-                e.currentTarget.scrollTop = e.currentTarget.scrollHeight
-            })
+                e.currentTarget.scrollTop = e.currentTarget.scrollHeight;
+            });
         },
     });
 
-    function $user_log(message, type) {
+    function $user_log(message, type = "info") {
         $bus.$emit("log", {
             message: message,
             type: type,
             level: 0,
         });
-        if (message) {
-            $bus.$emit("log", {
-                message: message,
-                type: type,
-                level: 1,
-            });
-            $bus.$emit("log", {
-                message: message,
-                type: type,
-                level: 2,
-            });
-        }
+        $bus.$emit(`notify.${type}`, message);
     }
 
-    function $test_log(message, type) {
+    function $test_log(message, type = "info") {
         $bus.$emit("log", {
             message: message,
             type: type,
             level: 1,
         });
-        if (message) {
-            $bus.$emit("log", {
-                message: message,
-                type: type,
-                level: 2,
-            });
-        }
     }
 
-    function $log(message, type) {
+    function $log(message, type = "info") {
         $bus.$emit("log", {
             message: message,
             type: type,
             level: 2,
-        });
-    }
-
-    function $process(process) {
-        return;
-        $bus.$emit("log", {
-            process: process,
         });
     }
 }

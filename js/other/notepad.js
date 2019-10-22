@@ -184,7 +184,7 @@
         },
         write_notepad: function () {
             if (this.text.length != 512) {
-                $user_log("还没读记事本", "error");
+                $user_log("还没读记事本", "danger");
                 return;
             }
             $procedure.load("$syno.write_notepad").exec(this.text);

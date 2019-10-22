@@ -26,7 +26,6 @@
 
     let methods = {
         get_random: function (e) {
-            let that = this;
             $procedure.load("$syno.get_random").exec();
         },
     };

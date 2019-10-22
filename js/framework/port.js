@@ -4,57 +4,60 @@
         total_datas: [],
         interval_id: 0,
         open: function (data) {
-            let that = this;
-            that.port = new serial_port(data.device, {
+            this.port = new serial_port(data.device, {
                 baudRate: parseInt(data.baud),
             });
-            that.port.on("error", function (err) {
+            this.port.on("error", err => {
                 $log(`$port.error: ${err.message}`, "error");
+                $test_log(`$port.error: ${err.message}`, "error");
             });
-            that.port.on("disconnect", function () {
-                $log(`$port.disconnect: ${that.port.path}`);
+            this.port.on("disconnect", () => {
+                $log(`$port.disconnect: ${this.port.path}`);
+                $test_log(`$port.disconnect: ${this.port.path}`);
 
             });
-            that.port.on("open", async function () {
-                $log(`$port.open: ${that.port.path}`);
+            this.port.on("open", async () => {
+                $log(`$port.open: ${this.port.path}`);
+                $test_log(`$port.open: ${this.port.path}`);
                 await data.func();
             });
-            that.port.on("close", function () {
-                $log(`$port.close: ${that.port.path}`);
+            this.port.on("close", () => {
+                $log(`$port.close: ${this.port.path}`);
+                $test_log(`$port.close: ${this.port.path}`);
 
             });
-            that.port.on("data", async function (a) {
-                console.log(`$port.data: ${that.port.path}`, a);
+            this.port.on("data", async  a => {
+                console.log(`$port.data: ${this.port.path}`, a);
                 for (let i = 0; i < a.length; i++) {
-                    that.total_datas.push(a[i]);
+                    this.total_datas.push(a[i]);
                 }
-                if (that.interval_id) {
-                    clearInterval(that.interval_id);
+                if (this.interval_id) {
+                    clearInterval(this.interval_id);
                 }
-                that.interval_id = setInterval(async function () {
-                    clearInterval(that.interval_id);
-                    await $procedure.exec(that.total_datas);
-                    that.total_datas = [];
+                this.interval_id = setInterval(async () => {
+                    clearInterval(this.interval_id);
+                    await $procedure.exec(this.total_datas);
+                    $test_log(this.total_datas.toString());
+                    this.total_datas = [];
                 }, 100);
             })
         },
         close: function () {
-            let that = this;
-            if (that.port.message === "undefined") {
-                $user_log("串口未打开，关闭失败", "error");
+            if (this.port.message === "undefined") {
+                $user_log("串口未打开，关闭失败", "danger");
                 return;
             }
-            that.port.close();
+            this.port.close();
         },
         write: function (arr) {
-            let that = this;
-            if (that.port.message === "undefined") {
-                $user_log("串口未打开，写入失败", "error");
+            if (this.port.message === "undefined") {
+                $user_log("串口未打开，写入失败", "danger");
                 $procedure.kill();
                 return;
             }
-            console.log(`$port.write: ${that.port.path}`, arr);
-            that.port.write(Uint8Array.from(arr), "binary");
+            console.log(`$port.write: ${this.port.path}`, arr);
+            $test_log(arr.toString());
+            this.port.write(Uint8Array.from(arr), "binary");
         },
     };
 }

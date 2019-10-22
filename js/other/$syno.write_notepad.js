@@ -14,12 +14,12 @@
             $log($syno.explain(result.retval));
 
             if (result.retval !== 0) {
-                $user_log("写记事本：" + $syno.explain(result.retval), "error");
+                $user_log(`写记事本：${$syno.explain(result.retval)}`, "danger");
                 $procedure.kill();
             }
 
             if (this.data.length === 0) {
-                $user_log("写记事本：" + $syno.explain(result.retval));
+                $user_log(`写记事本：${$syno.explain(result.retval)}`, "success");
                 $procedure.kill();
             } else {
                 $procedure.next("begin").exec();

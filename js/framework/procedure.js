@@ -9,11 +9,11 @@ window.$procedure = {
     },
     load: function (name, start_step = "begin") {
         if (!name || !this.procedures[name]) {
-            $log(`load procedure ${name} failed. because no such procedure.`, "error");
+            $log(`load procedure ${name} failed. because no such procedure.`, "danger");
             return;
         }
         if (!start_step || !this.procedures[name][start_step]) {
-            $log(`load procedure ${name} failed. because no start_step:${start_step}.`, "error");
+            $log(`load procedure ${name} failed. because no start_step:${start_step}.`, "danger");
             return;
         }
 
@@ -23,7 +23,7 @@ window.$procedure = {
     },
     kill: function () {
         if (this.now_procedure == null) {
-            $log("kill procedure failed. now_procedure is null.", "warn");
+            $log("kill procedure failed. now_procedure is null.", "warning");
         }
 
         this.now_procedure = null;
@@ -36,11 +36,11 @@ window.$procedure = {
     },
     exec: async function (data) {
         if (!this.now_procedure) {
-            $log("exec procedure failed. because no availiable procedure.", "error");
+            $log("exec procedure failed. because no availiable procedure.", "danger");
             return;
         }
         if (!this.now_procedure[this.now_step]) {
-            $log(`next procedure failed. ${this.now_procedure}["${this.now_step}"] is null, cannot be called.`, "warn");
+            $log(`next procedure failed. ${this.now_procedure}["${this.now_step}"] is null, cannot be called.`, "warning");
         }
 
         await this.now_procedure[this.now_step](data);
@@ -48,11 +48,11 @@ window.$procedure = {
     },
     next: function (step) {
         if (!this.now_procedure) {
-            $log("next procedure failed. because no availiable procedure.", "error");
+            $log("next procedure failed. because no availiable procedure.", "danger");
             return;
         }
         if (!this.now_procedure[step]) {
-            $log(`next procedure failed. ${this.now_procedure}["${step}"] is null, cannot be called.`, "warn");
+            $log(`next procedure failed. ${this.now_procedure}["${step}"] is null, cannot be called.`, "warning");
         }
 
         this.now_step = step;

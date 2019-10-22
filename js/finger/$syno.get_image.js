@@ -4,6 +4,8 @@
         "begin": async function (continued) {
             if (continued === true) {
                 this.continued = true;
+            } else if (continued !== undefined) {
+                $user_log(continued, "warning");
             }
             let data_package = (await $syno.request($syno.GetImage))[0];
             $port.write(data_package);
@@ -17,7 +19,7 @@
                 $port.write(data_package);
                 $procedure.next("show_image");
             } else {
-                $procedure.next("begin").exec();
+                $procedure.next("begin").exec($syno.explain(result.retval));
             }
         },
         "show_image": function (data) {

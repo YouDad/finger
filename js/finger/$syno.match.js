@@ -15,7 +15,7 @@
             $port.write(data_package);
             $procedure.next("get_image");
             if (message) {
-                $log(message);
+                $user_log(message, "warning");
             }
         },
         "get_image": async function (data) {
@@ -40,6 +40,7 @@
                 let data_package = (await $syno.request($syno.GetImage))[0];
                 $port.write(data_package);
                 $procedure.next("up_image");
+                $user_log($syno.explain(result.retval), "warning");
             }
         },
         "show_image": async function (data) {
@@ -75,15 +76,16 @@
                 $procedure.next("end").exec();
             } else {
                 //匹配失败
-                $procedure.next("end").exec("匹配失败");
+                $procedure.next("end").exec("比对失败");
             }
         },
         "end": function (message) {
             this.buffer_id = 1;
-            if (message)
-                $log(message);
-            else
-                $log("success");
+            if (message) {
+                $user_log(message, "danger");
+            } else {
+                $log("比对成功", "success");
+            }
             if (this.continued) {
                 $procedure.next("begin").exec();
             } else {

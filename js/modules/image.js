@@ -28,10 +28,9 @@
         template: template,
         data: data_css,
         created: function () {
-            let that = this;
-            $bus.$on("show_image", async function (result) {
+            $bus.$on("show_image", async  result => {
                 await $bus.$emit("convert_image", result);
-                that.image_src = result.src;
+                this.image_src = result.src;
             });
         },
     });

@@ -5,14 +5,14 @@
             this.data = data;
             let addr = data.use;
             if (addr.length != 8) {
-                $user_log("地址必须为8位十六进制数", "error");
+                $user_log("地址必须为8位十六进制数", "danger");
                 return;
             } else {
                 for (let i = 0; i < 8; i++) {
                     if (addr[i] < '0' || 'f' < addr[i] ||
                         '9' < addr[i] && addr[i] < 'A' ||
                         'F' < addr[i] && addr[i] < 'a') {
-                        $user_log("地址必须为8位十六进制数", "error");
+                        $user_log("地址必须为8位十六进制数", "danger");
                         return;
                     }
                 }
@@ -30,12 +30,12 @@
         "process_retval": async function (data) {
             let result = $syno.parse(data);
             $log($syno.explain(result.retval));
-            $user_log(`修改地址(${this.data.see})：` + $syno.explain(result.retval),
-                result.retval ? "error" : "info");
-            if (result.retval) {
+            $user_log(`修改地址(${this.data.see})：${$syno.explain(result.retval)}`, result.retval ? "danger" : "info");
+            if (!result.retval) {
                 await $bus.$emit("set_address", { address: this.data.use });
             }
-            $procedure.load("$syno.get_devinfo").exec();
+            $procedure.add("$syno.get_devinfo");
+            $procedure.kill();
         },
     };
 

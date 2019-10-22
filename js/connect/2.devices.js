@@ -3,12 +3,12 @@
         <div>
             <div class="dropdown" :style="css_list">
                 <button class="btn btn-default btn-block  dropdown-toggle" data-toggle="dropdown">
-                    设备: {{ now_device }}<span class="caret"></span>
+                    设备: {{ device }}<span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" style="padding:0.25em;">
                     <button class="btn btn-default btn-block"
                         v-for="device in devices"
-                        @click="click_serial">{{ device.comName }} ({{device.manufacturer}})</button>
+                        @click="click_serial(device)">{{ device.comName }} ({{device.manufacturer}})</button>
                 </ul>
             </div>
             <button class="btn btn-primary btn-block" :style="css_button"
@@ -18,7 +18,7 @@
 
     let data_css = function () {
         return {
-            now_device: "",
+            device: "",
             devices: [],
             css_list: {
                 'padding-bottom': '0.5em',
@@ -30,25 +30,22 @@
     };
 
     let methods = {
-        click_serial: function (e) {
-            let that = this;
-            that.now_device = $(e.target).text();
+        click_serial: function (device) {
+            this.device = `${device.comName} (${device.manufacturer})`;
         },
         flash_serial: function () {
-            let that = this;
-            that.devices.length = 0;
-            serial_port.list(function (err, ports) {
-                ports.forEach(function (port) {
+            this.devices.length = 0;
+            serial_port.list((err, ports) => {
+                for (port of ports) {
                     $log(port);
-                    if (port.comName != undefined &&
-                        port.pnpId != undefined &&
+                    if (port.comName != undefined && port.pnpId != undefined &&
                         port.manufacturer != undefined) {
-                        that.devices.push(port);
-                        if (that.now_device == "") {
-                            that.now_device = `${port.comName} (${port.manufacturer})`;
+                        this.devices.push(port);
+                        if (this.device == "") {
+                            this.device = `${port.comName} (${port.manufacturer})`;
                         }
                     }
-                });
+                }
             });
         },
     };
@@ -60,7 +57,7 @@
         created: function () {
             let that = this;
             $bus.$on("get_device", function (data) {
-                data.device = that.now_device.split(" ")[0];
+                data.device = that.device.split(" ")[0];
             });
         },
         mounted: methods.flash_serial,

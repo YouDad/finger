@@ -9,7 +9,7 @@
             $port.write(data_package);
             $procedure.next("up_image");
             if (message) {
-                $log(message);
+                $user_log(message, "warning");
             }
         },
         "up_image": async function (data) {
@@ -20,7 +20,7 @@
                 $port.write(data_package);
                 $procedure.next("show_image");
             } else {
-                $procedure.next("begin").exec();
+                $procedure.next("begin").exec($syno.explain(result.retval));
             }
         },
         "show_image": async function (data) {
@@ -63,15 +63,17 @@
                 $procedure.next("end").exec();
             } else {
                 //匹配失败
-                $procedure.next("end").exec("匹配失败");
+                $procedure.next("end").exec("搜索失败");
             }
         },
         "end": function (message) {
             this.buffer_id = 1;
-            if (message)
-                $log(message);
-            else
-                $log("success");
+            if (message) {
+                $log(message, "danger");
+            } else {
+                $log("搜索成功", "success");
+            }
+
             if (this.continued) {
                 $procedure.next("begin").exec();
             } else {

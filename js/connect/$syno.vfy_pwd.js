@@ -15,6 +15,7 @@
             let data_package = (await $syno.request($syno.VfyPwd, datas))[0];
             $port.write(data_package);
             $procedure.next("process_vfy_pwd");
+
             this.interval_id = setInterval(() => {
                 clearInterval(this.interval_id);
                 $procedure.exec();
@@ -23,18 +24,13 @@
         "process_vfy_pwd": function (data) {
             if (data === undefined) {
                 clearInterval(this.interval_id);
-                let message = "验证密码超时";
-                $user_log(message);
-                $bus.$emit("notify.danger", message);
+                $user_log("验证密码超时", "danger");
             } else {
                 let result = $syno.parse(data);
                 $log($syno.explain(result.retval));
                 let message = "验证密码：" + $syno.explain(result.retval);
-                if (result.retval) {
-                    $user_log(message);
-                    $bus.$emit("notify.danger", message);
-                } else {
-                    $bus.$emit("notify.success", message);
+                $user_log(message, result.retval ? "danger" : "success");
+                if (!result.retval) {
                     $procedure.add("$syno.get_devinfo");
                     $procedure.add('$syno.validchar');
                 }

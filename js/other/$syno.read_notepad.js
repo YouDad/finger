@@ -11,19 +11,20 @@
             $log($syno.explain(result.retval));
 
             if (result.retval !== 0) {
-                $user_log("读记事本：" + $syno.explain(result.retval), "error");
+                $user_log("读记事本：" + $syno.explain(result.retval), "danger");
                 $procedure.kill();
             }
 
             for (let i = 0; i < result.data.length; i++) {
                 this.data.push(result.data[i]);
             }
-            
+
             $bus.$emit("notepad_progress", this.data.length / 32 / 16 * 100);
 
             if (this.data.length === 512) {
                 $bus.$emit("notepad", this.data);
-                $user_log("读记事本：" + $syno.explain(result.retval));
+                $user_log(`读记事本：${$syno.explain(result.retval)}`,
+                    result.retval ? "danger" : "success");
                 $procedure.kill();
             } else {
                 $procedure.next("begin").exec();

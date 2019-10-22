@@ -10,8 +10,9 @@
         "process_retval": function (data) {
             let result = $syno.parse(data);
             $log($syno.explain(result.retval));
-            $user_log(`控制LED灯(${this.data.toString(2)})结果：` + $syno.explain(result.retval));
-            if(result.retval!=0){
+            $user_log(`控制LED灯(${this.data.toString(2)})结果：` + $syno.explain(result.retval),
+                result.retval ? "danger" : "success");
+            if (result.retval != 0) {
                 $bus.$emit("leds_back");
             }
             $procedure.kill();

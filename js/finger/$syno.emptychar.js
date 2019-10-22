@@ -8,10 +8,9 @@
         "process_retval": function (data) {
             let result = $syno.parse(data);
             $log($syno.explain(result.retval));
-            $user_log("清空模板库：" + $syno.explain(result.retval),
-                result.retval ? "error" : "info");
+            $user_log(`清空模板库：${$syno.explain(result.retval)}`, result.retval ? "danger" : "info");
+            $procedure.add("$syno.validchar");
             $procedure.kill();
-            $procedure.load('$syno.validchar').exec();
         },
     };
 

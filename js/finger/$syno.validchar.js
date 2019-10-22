@@ -24,7 +24,7 @@
             $log($syno.explain(result.retval));
             if (result.retval) {
                 $user_log(`获取有效模板列表：` + $syno.explain(result.retval),
-                    result.retval ? "error" : "info");
+                    result.retval ? "danger" : "info");
             } else {
                 list = [];
                 for (let i = 0; i < 32; i++) {
@@ -35,9 +35,9 @@
                     }
                 }
                 if (list.length == 0) {
-                    $user_log("获取有效模板列表为空");
+                    $user_log("获取有效模板列表为空", "success");
                 } else {
-                    $user_log("获取有效模板列表：" + list.join(","));
+                    $user_log("获取有效模板列表：" + list.join(","), "success");
                 }
 
                 bool_list = [];

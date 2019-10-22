@@ -6,28 +6,24 @@
             $port.write(data_package);
             $procedure.next("process_enroll_image");
             if (message) {
-                $user_log(message, "warn");
+                $user_log(message, "warning");
             }
-
-            $process((this.buffer_id * 6 - 6) / 20);
         },
         "process_enroll_image": async function (data) {
             let result = $syno.parse(data);
-            $test_log("GetEnrollImages" + $syno.explain(result.retval));
+            $log("GetEnrollImages" + $syno.explain(result.retval));
             if (result.retval == 0x00) {
                 let data_package = (await $syno.request($syno.UpImage))[0];
                 $port.write(data_package);
                 $procedure.next("show_image");
             } else {
-                $procedure.next("begin").exec();
+                $procedure.next("begin").exec($syno.explain(result.retval));
                 return;
             }
-
-            $process((this.buffer_id * 6 - 5) / 20);
         },
         "show_image": async function (data) {
             let result = $syno.parse(data);
-            $test_log("UpImage" + $syno.explain(result.retval));
+            $log("UpImage" + $syno.explain(result.retval));
             if (result.retval == 0x00) {
                 $bus.$emit("show_image", result);
 
@@ -38,12 +34,10 @@
                 $procedure.next("end").exec("上传图片失败");
                 return;
             }
-
-            $process((this.buffer_id * 6 - 4) / 20);
         },
         "search": async function (data) {
             let result = $syno.parse(data);
-            $test_log("GenChar" + $syno.explain(result.retval));
+            $log("GenChar" + $syno.explain(result.retval));
             if (result.retval == 0x00) {
                 let dbsize = {};
                 await $bus.$emit("get_dbsize", dbsize);
@@ -58,12 +52,10 @@
                 $procedure.next("begin").exec("生成特征失败");
                 return;
             }
-
-            $process((this.buffer_id * 6 - 3) / 20);
         },
         "process_search": async function (data) {
             let result = $syno.parse(data);
-            $test_log("Search" + $syno.explain(result.retval));
+            $log("Search" + $syno.explain(result.retval));
             if (result.retval == 0x09 || result.retval == 0x17) {
                 let data_package = (await $syno.request($syno.GetEnrollImage))[0];
                 $port.write(data_package);
@@ -73,12 +65,10 @@
                 $procedure.next("end").exec("搜到指纹");
                 return;
             }
-
-            $process((this.buffer_id * 6 - 2) / 20);
         },
         "wait_for_move_finger": async function (data) {
             let result = $syno.parse(data);
-            $test_log("GetEnrollImage" + $syno.explain(result.retval));
+            $log("GetEnrollImage" + $syno.explain(result.retval));
             if (result.retval == 0x02) {
                 //没指纹
                 if (this.buffer_id >= 3) {
@@ -96,12 +86,10 @@
                 $port.write(data_package);
                 $procedure.next("wait_for_move_finger");
             }
-
-            $process((this.buffer_id * 6 - 1) / 20);
         },
         "process_register_model": async function (data) {
             let result = $syno.parse(data);
-            $test_log("RegModel" + $syno.explain(result.retval));
+            $log("RegModel" + $syno.explain(result.retval));
             if (result.retval == 0x00) {
                 let finger_id = {};
                 await $bus.$emit("get_finger_id", finger_id);
@@ -116,31 +104,27 @@
                 $procedure.next("end").exec("合并失败");
                 return;
             }
-
-            $process((this.buffer_id * 6 - 0) / 20);
         },
         "process_store_char": function (data) {
             let result = $syno.parse(data);
-            $test_log("StoreChar" + $syno.explain(result.retval));
+            $log("StoreChar" + $syno.explain(result.retval));
             if (result.retval == 0x00) {
                 $procedure.next("end").exec();
             } else {
                 $procedure.next("end").exec("存储失败");
                 return;
             }
-
-            $process((this.buffer_id * 6 + 1) / 20);
         },
         "end": function (message) {
             this.buffer_id = 1;
-            if (message)
-                $user_log(message, "error");
-            else
-                $user_log("注册成功");
-            $procedure.kill();
+            if (message) {
+                $user_log(message, "danger");
+            } else {
+                $user_log("注册成功", "success");
+            }
 
-            $process(1);
-            $procedure.load('$syno.validchar').exec();
+            $procedure.add("$syno.validchar");
+            $procedure.kill();
         }
     };
 

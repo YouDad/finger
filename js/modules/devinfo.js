@@ -178,7 +178,6 @@
 
     let methods = {
         flash_devinfo: function (e) {
-            let that = this;
             $procedure.load("$syno.get_devinfo").exec();
         },
         print_hex: function (a, b) {
@@ -197,15 +196,13 @@
             return str;
         },
         change_secur_level: function () {
-            let that = this;
-            let data = { see: that.temp_seclvl };
-            data.use = that.temp_seclvl[0];
+            let data = { see: this.temp_seclvl };
+            data.use = this.temp_seclvl[0];
             $procedure.load("$syno.change_seclvl").exec(data);
         },
         change_packet_size: function () {
-            let that = this;
-            let data = { see: that.temp_pktsize };
-            switch (that.temp_pktsize) {
+            let data = { see: this.temp_pktsize };
+            switch (this.temp_pktsize) {
                 case "32": data.use = 0; break;
                 case "64": data.use = 1; break;
                 case "128": data.use = 2; break;
@@ -214,21 +211,18 @@
             $procedure.load("$syno.change_pktsize").exec(data);
         },
         change_baud: function () {
-            let that = this;
-            let data = { see: that.temp_baud };
-            data.use = that.temp_baud / 9600;
+            let data = { see: this.temp_baud };
+            data.use = this.temp_baud / 9600;
             $procedure.load("$syno.change_baud").exec(data);
         },
         change_address: function () {
-            let that = this;
-            let data = { see: that.temp_address };
-            data.use = that.temp_address.replace("0x", "").replace("0X", "");
+            let data = { see: this.temp_address };
+            data.use = this.temp_address.replace("0x", "").replace("0X", "");
             $procedure.load("$syno.change_address").exec(data);
         },
         change_password: function () {
-            let that = this;
-            let data = { see: that.temp_password };
-            data.use = that.temp_password.replace("0x", "").replace("0X", "");
+            let data = { see: this.temp_password };
+            data.use = this.temp_password.replace("0x", "").replace("0X", "");
             $procedure.load("$syno.change_password").exec(data);
         },
     };
@@ -324,24 +318,23 @@
         methods: methods,
         computed: computed,
         created: function () {
-            let that = this;
-            $bus.$on("set_devinfo", function (r) {
+            $bus.$on("set_devinfo", r => {
                 r = r.data;
-                that.devinfo_word = [];
-                that.devinfo_str = "";
+                this.devinfo_word = [];
+                this.devinfo_str = "";
                 if (r.length > 0) {
                     for (let i = 0; i < 64; i++) {
-                        that.devinfo_word.push(r[i * 2] * 256 + r[i * 2 + 1]);
-                        that.devinfo_str += String.fromCharCode(r[i * 2]);
-                        that.devinfo_str += String.fromCharCode(r[i * 2 + 1]);
+                        this.devinfo_word.push(r[i * 2] * 256 + r[i * 2 + 1]);
+                        this.devinfo_str += String.fromCharCode(r[i * 2]);
+                        this.devinfo_str += String.fromCharCode(r[i * 2 + 1]);
                     }
                 }
             });
-            $bus.$on("get_dbsize", function (dbsize) {
-                dbsize.dbsize = that.DataBaseSize;
+            $bus.$on("get_dbsize", dbsize => {
+                dbsize.dbsize = this.DataBaseSize;
             });
-            $bus.$on("get_devinfo", async function () {
-                await that.flash_devinfo();
+            $bus.$on("get_devinfo", async () => {
+                await this.flash_devinfo();
             });
         },
         mounted: function () {

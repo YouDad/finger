@@ -11,9 +11,10 @@
         "process_retval": function (data) {
             let result = $syno.parse(data);
             $log($syno.explain(result.retval));
-            $user_log(`修改波特率(${this.data.see})：` + $syno.explain(result.retval),
-                result.retval ? "error" : "info");
-            $procedure.load("$syno.get_devinfo").exec();
+            $user_log(`修改波特率(${this.data.see})：${$syno.explain(result.retval)}`,
+                result.retval ? "danger" : "info");
+            $procedure.add("$syno.get_devinfo");
+            $procedure.kill();
         },
     };
 

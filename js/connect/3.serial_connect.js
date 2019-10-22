@@ -45,8 +45,8 @@
         connect: async function (e) {
             let that = this;
             let data = {
-                func: async function () {
-                    await $procedure.load("$syno.vfy_pwd").exec();
+                func: function () {
+                     $procedure.load("$syno.vfy_pwd").exec();
                 }
             };
             await $bus.$emit("get_baud", data);

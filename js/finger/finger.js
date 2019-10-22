@@ -9,9 +9,9 @@
             <button :style="css_button" class="btn btn-default" @click="exec_procedure('$syno.enroll')">注册</button>
             <button :style="css_button" class="btn btn-default" @click="exec_procedure('$syno.match')">比对</button>
             <button :style="css_button" class="btn btn-default" @click="exec_procedure('$syno.search')">搜索</button>
-            <button :style="css_button" class="btn btn-default" @click="exec_procedure('$syno.get_image')">连续采图</button>
-            <button :style="css_button" class="btn btn-default" @click="exec_procedure('$syno.match')">连续比对</button>
-            <button :style="css_button" class="btn btn-default" @click="exec_procedure('$syno.search')">连续搜索</button>
+            <button :style="css_button" class="btn btn-default" @click="exec_procedure('$syno.get_image', true)">连续采图</button>
+            <button :style="css_button" class="btn btn-default" @click="exec_procedure('$syno.match', true)">连续比对</button>
+            <button :style="css_button" class="btn btn-default" @click="exec_procedure('$syno.search', true)">连续搜索</button>
             <button :style="css_button" class="btn btn-danger"  @click="exec_procedure('$syno.emptychar')">清空指纹库</button>
             <button :style="css_button" class="btn btn-danger"  @click="exec_procedure('$syno.delchar')">删除指纹</button>
             <button :style="css_button" class="btn btn-warning" @click="exec_procedure('$syno.cancel')">取消指令</button>

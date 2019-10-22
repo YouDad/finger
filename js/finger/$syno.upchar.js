@@ -12,7 +12,7 @@
             $port.write(data_package);
             $procedure.next("process_loadchar");
             if (message) {
-                $log(message);
+                $user_log(message, "warning");
             }
         },
         "process_loadchar": async function (data) {
@@ -39,7 +39,7 @@
         },
         "end": function (message) {
             if (message) {
-                $user_log(message, "error");
+                $user_log(message, "danger");
             }
             $procedure.kill();
         },

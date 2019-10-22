@@ -8,7 +8,11 @@
         "parse_data": function (data) {
             let result = $syno.parse(data);
             $log($syno.explain(result.retval));
-            $user_log("随机数结果：" + result.data.toString());
+            if (result.retval == 0x00) {
+                $user_log(`随机数结果：${result.data.toString()}`);
+            } else {
+                $user_log(`随机数结果：${$syno.explain(result.retval)}`, "danger");
+            }
             $procedure.kill();
         },
     };

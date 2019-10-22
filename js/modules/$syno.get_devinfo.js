@@ -9,6 +9,7 @@
             let result = $syno.parse(data);
             $log($syno.explain(result.retval));
             $log(result);
+            $user_log(`获得设备信息: ${$syno.explain(result.retval)}`, "success");
             $bus.$emit("set_devinfo", result);
             $procedure.kill();
         },
