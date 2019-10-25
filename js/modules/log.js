@@ -3,17 +3,26 @@
         <div :style="css_div">
             <div class="btn-group" :style="css_nav">
                 <button type="button" class="btn btn-success" @click="log_type=0;">用户</button>
-                <button type="button" class="btn btn-warning" @click="log_type=1;">测试</button>
+                <button type="button" class="btn btn-warning" @click="log_type=1;">串口</button>
                 <button type="button" class="btn btn-danger" @click="log_type=2;">开发者</button>
             </div>
             <ul class="list-group" :style="css_list_limited" v-show="log_type==0">
-                <li class="list-group-item" :class="log.type" v-for="log in user_logs">{{log.message}}<span class="badge">{{now}} {{log.number}}</span></li>
+                    <li class="list-group-item" :class="log.type" v-for="(log, index) in user_logs">
+                        {{log.message}}
+                        <span :key="log.message+index" class="badge">{{now}} {{log.number}}</span>
+                    </li>
             </ul>
             <ul class="list-group" :style="css_list_limited" v-show="log_type==1">
-                <li class="list-group-item" :class="log.type" v-for="log in test_logs">{{log.message}}<span class="badge">{{now}} {{log.number}}</span></li>
+                    <li class="list-group-item" :class="log.type" v-for="(log, index) in test_logs">
+                        {{log.message}}
+                        <span :key="log.message+index" class="badge">{{now}} {{log.number}}</span>
+                    </li>
             </ul>
             <ul class="list-group" :style="css_list_limited" v-show="log_type==2">
-                <li class="list-group-item" :class="log.type" v-for="log in deve_logs">{{log.message}}<span class="badge">{{now}} {{log.number}}</span></li>
+                    <li class="list-group-item" :class="log.type" v-for="(log, index) in deve_logs">
+                        {{log.message}}
+                        <span :key="log.message+index" class="badge">{{now}} {{log.number}}</span>
+                    </li>
             </ul>
         </div>
     `;
@@ -28,6 +37,7 @@
             css_div: {
                 'width': '50em',
                 'padding': '1em',
+                '-webkit-user-select': 'text',
             },
             css_nav: {
                 'border': '0.5em solid #d9edf7',

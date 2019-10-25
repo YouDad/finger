@@ -13,7 +13,7 @@
     <div id="vue" :style="css_div">
         <luwh_header :style="css_luwh_header"></luwh_header>
         <div class="row" :style="css_content">
-            <luwh_notify></luwh_notify>
+            <luwh_notify :style="css_luwh_notify"></luwh_notify>
             <luwh_image class="col-xs-2" :style="css_luwh_image"></luwh_image>
             <luwh_connect id="a" class="con-xs-3" :style="css_luwh_connect"></luwh_connect>
             <luwh_finger class="col-xs-3" :style="css_luwh_finger"></luwh_finger>
@@ -51,6 +51,9 @@
                         'right': '0',
                         'bottom': '0',
                     },
+                    css_luwh_notify: {
+                        'pointer-events': 'none',
+                    },
                     css_luwh_header: {
                         'position': 'absolute',
                         'left': '0',
@@ -82,7 +85,7 @@
                         'margin': '2em',
                         'left': '0em',
                         'top': '24em',
-                        
+
                         'width': '21em',
                         'height': '21em',
                     },
@@ -102,7 +105,7 @@
                     },
                     css_luwh_other: {
                         'position': 'absolute',
-                        'margin': '2em', 
+                        'margin': '2em',
                         'left': '50em',
                         'top': '0em',
 

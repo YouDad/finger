@@ -19,7 +19,7 @@
                 $port.write(data_package);
                 $procedure.next("show_image");
             } else {
-                $procedure.next("begin").exec($syno.explain(result.retval));
+                setTimeout(() => $procedure.next("begin").exec($syno.explain(result.retval)), 300);
             }
         },
         "show_image": function (data) {
@@ -28,6 +28,7 @@
             if (result.retval == 0x00) {
                 $bus.$emit("show_image", result);
             }
+            $user_log("采图成功", "success");
             if (this.continued) {
                 $procedure.next("begin").exec();
             } else {

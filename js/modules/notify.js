@@ -2,7 +2,7 @@
     let template = `
         <div>
             <transition-group name="slide-fade">
-                <div class="modal-dialog fade show" style="opacity: 0.8; z-index: 1050; margin: 0 auto;" v-for="(text, index) in notify_text" :key="index+text">
+                <div class="modal-dialog fade show" style="opacity: 0.7; z-index: 1050; margin: 0 auto;" v-for="(text, index) in notify_text" :key="index+text">
                     <div class="alert" style="margin-bottom: 0;" :class="css_alert[index]">{{text}}</div>
                 </div>
             </transition-group>

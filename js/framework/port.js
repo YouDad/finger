@@ -26,7 +26,7 @@
                 $test_log(`$port.close: ${this.port.path}`);
 
             });
-            this.port.on("data", async  a => {
+            this.port.on("data", async a => {
                 console.log(`$port.data: ${this.port.path}`, a);
                 for (let i = 0; i < a.length; i++) {
                     this.total_datas.push(a[i]);
@@ -37,7 +37,7 @@
                 this.interval_id = setInterval(async () => {
                     clearInterval(this.interval_id);
                     await $procedure.exec(this.total_datas);
-                    $test_log(this.total_datas.toString());
+                    $test_log("$port.read: "+this.total_datas.toString());
                     this.total_datas = [];
                 }, 100);
             })
@@ -56,7 +56,7 @@
                 return;
             }
             console.log(`$port.write: ${this.port.path}`, arr);
-            $test_log(arr.toString());
+            $test_log("$port.write: "+arr.toString());
             this.port.write(Uint8Array.from(arr), "binary");
         },
     };

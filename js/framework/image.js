@@ -12,5 +12,10 @@
         let imageData = $canvas.createImageData(arr, 160);
         ctx.putImageData(imageData, 0, 0);
         result.src = canvas.toDataURL();
+        let is_save_image = {};
+        await $bus.$emit("is_save_image", is_save_image);
+        if (is_save_image.is_save_image) {
+            $bus.$emit("save_png", canvas.toBuffer());
+        }
     });
 }

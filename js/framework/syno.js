@@ -51,7 +51,7 @@
             data_package.push(parseInt(cmd.addr.slice(4, 6), 16));
             data_package.push(parseInt(cmd.addr.slice(6, 8), 16));
             data_package.push(parseInt(cmd.sign));
-            data_package.push((cmd.data.length + 2) / 256);
+            data_package.push(Math.floor((cmd.data.length + 2) / 256));
             data_package.push((cmd.data.length + 2) % 256);
             for (let data of cmd.data) {
                 data_package.push(data);
@@ -61,7 +61,7 @@
                 sum += data_package[i];
             }
             sum %= 65536;
-            data_package.push(sum / 256);
+            data_package.push(Math.floor(sum / 256));
             data_package.push(sum % 256);
             return data_package;
         },

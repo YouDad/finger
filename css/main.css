@@ -97,14 +97,13 @@ span.selection:hover {
 }
 
 .slide-fade-enter-active {
-    transition: all .5s ease;
+    transition: all .5s ease-in-out;
 }
 
 .slide-fade-leave-active {
-    transition: all .5s ease;
+    transition: all .5s ease-in-out;
 }
 
-.slide-fade-enter, .slide-fade-leave-to {
-    transform: translateY(-4em);
-    opacity: 0;
+.slide-fade-leave-to, .slide-fade-enter {
+    transform: scale(0);
 }
