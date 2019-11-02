@@ -31,7 +31,7 @@
         }
     };
 
-    Vue.component('luwh_leds', {
+    Vue.component('syno_leds', {
         template: template,
         data: data_css,
         methods: methods,

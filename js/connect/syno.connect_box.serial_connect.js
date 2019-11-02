@@ -1,6 +1,6 @@
 {
     let template = `
-        <div :style="css_luwh_serial_connect">
+        <div :style="css_syno_serial_connect">
             <div class="input-group" :style="css_address">
                 <span class="input-group-addon">地址</span>
                 <input type="text" class="form-control"
@@ -23,7 +23,7 @@
 
     let data_css = function () {
         return {
-            css_luwh_serial_connect: {
+            css_syno_serial_connect: {
 
             },
             css_address: {
@@ -62,7 +62,7 @@
         },
     };
 
-    Vue.component('luwh_serial_connect', {
+    Vue.component('syno_serial_connect', {
         template: template,
         data: data_css,
         methods: methods,

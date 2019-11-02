@@ -1,6 +1,6 @@
 {
     let template = `
-        <div :style="css_luwh_devinfo">
+        <div :style="css_syno_devinfo">
             <button class="list-group-item" :style="css_button" @click="show_now++;">
                 查看另外的信息
             </button>
@@ -133,7 +133,7 @@
 
     let data_css = function () {
         return {
-            css_luwh_devinfo: {
+            css_syno_devinfo: {
                 'width': '21em',
                 'padding': '1em',
                 'border': '0.5em solid #d9edf7',
@@ -312,7 +312,7 @@
         ParaTableFlag: function () { return this.print_hex(63); },
     };
 
-    Vue.component('luwh_devinfo', {
+    Vue.component('syno_devinfo', {
         template: template,
         data: data_css,
         methods: methods,

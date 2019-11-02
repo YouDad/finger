@@ -2,8 +2,8 @@
     let template = `
         <div :style="css_div">
             <button :style="css_random" class="btn btn-default" @click="get_random">获取随机数</button>
-            <luwh_notepad></luwh_notepad>
-            <luwh_leds :style="css_leds"></luwh_leds>
+            <syno_notepad></syno_notepad>
+            <syno_leds :style="css_leds"></syno_leds>
         </div>
     `;
 
@@ -29,7 +29,7 @@
             $procedure.load("$syno.get_random").exec();
         },
     };
-    Vue.component('luwh_other', {
+    Vue.component('syno_other', {
         template: template,
         data: data_css,
         methods: methods,

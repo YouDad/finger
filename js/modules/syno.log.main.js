@@ -57,7 +57,7 @@
         },
     };
 
-    Vue.component('luwh_log', {
+    Vue.component('syno_log', {
         template: template,
         data: data_css,
         computed: computed,

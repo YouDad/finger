@@ -190,7 +190,7 @@
             $procedure.load("$syno.write_notepad").exec(this.text);
         },
     };
-    Vue.component('luwh_notepad', {
+    Vue.component('syno_notepad', {
         template: template,
         data: data_css,
         methods: methods,

@@ -31,7 +31,7 @@
         },
     }
 
-    Vue.component('luwh_image', {
+    Vue.component('syno_image', {
         template: template,
         data: data_css,
         methods: methods,

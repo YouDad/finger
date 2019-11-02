@@ -46,7 +46,7 @@
         }
     };
 
-    Vue.component('luwh_header', {
+    Vue.component('syno_header', {
         template: template,
         methods: methods,
     });

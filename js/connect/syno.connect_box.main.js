@@ -1,10 +1,10 @@
 {
     let template = `
         <div :style="css_div">
-            <luwh_bauds :style="css_luwh_bauds" v-show="show"></luwh_bauds>
-            <luwh_devices :style="css_luwh_devices" v-show="show"></luwh_devices>
+            <syno_bauds :style="css_syno_bauds" v-show="show"></syno_bauds>
+            <syno_devices :style="css_syno_devices" v-show="show"></syno_devices>
 
-            <luwh_serial_connect :style="css_luwh_serial_connect" v-show="show"></luwh_serial_connect>
+            <syno_serial_connect :style="css_syno_serial_connect" v-show="show"></syno_serial_connect>
         </div>
     `;
 
@@ -16,25 +16,25 @@
                 'border': '0.5em solid #d9edf7',
                 'display': 'inline-block',
             },
-            css_luwh_bauds: {
+            css_syno_bauds: {
                 'padding': '0.25em',
                 'width': '100%',
             },
-            css_luwh_devices: {
+            css_syno_devices: {
                 'padding': '0.25em',
                 'width': '100%',
             },
-            css_luwh_serial_connect: {
-                'padding': '0.25em',
-                'width': '100%',
-                'margin-top': '2em',
-            },
-            css_luwh_chdev_pwd: {
+            css_syno_serial_connect: {
                 'padding': '0.25em',
                 'width': '100%',
                 'margin-top': '2em',
             },
-            css_luwh_chdev_addr: {
+            css_syno_chdev_pwd: {
+                'padding': '0.25em',
+                'width': '100%',
+                'margin-top': '2em',
+            },
+            css_syno_chdev_addr: {
                 'padding': '0.25em',
                 'width': '100%',
             },
@@ -42,7 +42,7 @@
         };
     };
 
-    Vue.component('luwh_connect', {
+    Vue.component('syno_connect', {
         template: template,
         data: css,
     });

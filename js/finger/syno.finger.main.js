@@ -1,8 +1,8 @@
 {
     let template = `
         <div :style="css_div">
-            <button :style="css_luwh_get_image" class="btn btn-default" @click="exec_procedure('$syno.get_image')">获取图像</button>
-            <div class="input-group" :style="css_luwh_finger_id">
+            <button :style="css_syno_get_image" class="btn btn-default" @click="exec_procedure('$syno.get_image')">获取图像</button>
+            <div class="input-group" :style="css_syno_finger_id">
                 <span class="input-group-addon">指纹ID</span>
                 <input type="text" class="form-control" placeholder="finger_id" v-model="finger_id"/>
             </div>
@@ -20,7 +20,7 @@
             <input  class="hide" id="downchar_file_selector"    @change="downchar($event)" type="file"/>
             <button :style="css_button" class="btn btn-default" @click="downimage()">下载图像</button>
             <input  class="hide" id="downimage_file_selector"   @change="downimage($event)" type="file"/>
-            <luwh_finger_map :style="css_map"></luwh_finger_map>
+            <syno_finger_map :style="css_map"></syno_finger_map>
         </div>
     `;
 
@@ -34,12 +34,12 @@
                 'border': '0.5em solid #d9edf7',
                 'border-width': '0.5em',
             },
-            css_luwh_get_image: {
+            css_syno_get_image: {
                 'margin': '-1.3em 0.2em 0.5em',
                 'width': '6em',
                 'display': 'inline-table',
             },
-            css_luwh_finger_id: {
+            css_syno_finger_id: {
                 'margin': '0.5em 0.15em',
                 'width': '13em',
                 'display': 'inline-table',
@@ -83,7 +83,7 @@
         }
     };
 
-    Vue.component('luwh_finger', {
+    Vue.component('syno_finger', {
         template: template,
         data: data_css,
         methods: methods,

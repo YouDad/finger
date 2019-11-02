@@ -11,15 +11,15 @@
 
 <body>
     <div id="vue" :style="css_div">
-        <luwh_header :style="css_luwh_header"></luwh_header>
+        <syno_header :style="css_syno_header"></syno_header>
         <div class="row" :style="css_content">
-            <luwh_notify :style="css_luwh_notify"></luwh_notify>
-            <luwh_image class="col-xs-2" :style="css_luwh_image"></luwh_image>
-            <luwh_connect id="a" class="con-xs-3" :style="css_luwh_connect"></luwh_connect>
-            <luwh_finger class="col-xs-3" :style="css_luwh_finger"></luwh_finger>
-            <luwh_other class="col-xs-3" :style="css_luwh_other"></luwh_other>
-            <luwh_devinfo class="col-xs-3" :style="css_luwh_devinfo"></luwh_devinfo>
-            <luwh_log class="col-xs-10" :style="css_luwh_log"></luwh_log>
+            <syno_notify :style="css_syno_notify"></syno_notify>
+            <syno_image class="col-xs-2" :style="css_syno_image"></syno_image>
+            <syno_connect id="a" class="con-xs-3" :style="css_syno_connect"></syno_connect>
+            <syno_finger class="col-xs-3" :style="css_syno_finger"></syno_finger>
+            <syno_other class="col-xs-3" :style="css_syno_other"></syno_other>
+            <syno_devinfo class="col-xs-3" :style="css_syno_devinfo"></syno_devinfo>
+            <syno_log class="col-xs-10" :style="css_syno_log"></syno_log>
         </div>
     </div>
 
@@ -31,12 +31,12 @@
         $loadjs("js/finger");
         $loadjs("js/other");
         let dependencies = [
-            'window.Vue.options["components"]["luwh_connect"]',
-            'window.Vue.options["components"]["luwh_header"]',
-            'window.Vue.options["components"]["luwh_devinfo"]',
-            'window.Vue.options["components"]["luwh_finger"]',
-            'window.Vue.options["components"]["luwh_image"]',
-            'window.Vue.options["components"]["luwh_other"]',
+            'window.Vue.options["components"]["syno_connect"]',
+            'window.Vue.options["components"]["syno_header"]',
+            'window.Vue.options["components"]["syno_devinfo"]',
+            'window.Vue.options["components"]["syno_finger"]',
+            'window.Vue.options["components"]["syno_image"]',
+            'window.Vue.options["components"]["syno_other"]',
         ];
         $wait(dependencies, function () {
             var vm = new Vue({
@@ -51,10 +51,10 @@
                         'right': '0',
                         'bottom': '0',
                     },
-                    css_luwh_notify: {
+                    css_syno_notify: {
                         'pointer-events': 'none',
                     },
-                    css_luwh_header: {
+                    css_syno_header: {
                         'position': 'absolute',
                         'left': '0',
                         'right': '0',
@@ -71,7 +71,7 @@
                     },
 
 
-                    css_luwh_image: {
+                    css_syno_image: {
                         'position': 'absolute',
                         'margin': '2em',
                         'left': '0em',
@@ -80,7 +80,7 @@
                         'width': '21em',
                         'height': '23em',
                     },
-                    css_luwh_connect: {
+                    css_syno_connect: {
                         'position': 'absolute',
                         'margin': '2em',
                         'left': '0em',
@@ -89,13 +89,13 @@
                         'width': '21em',
                         'height': '21em',
                     },
-                    css_luwh_finger: {
+                    css_syno_finger: {
                         'position': 'absolute',
                         'margin': '2em',
                         'left': '23em',
                         'top': '0em',
                     },
-                    css_luwh_character: {
+                    css_syno_character: {
                         'position': 'absolute',
                         'margin': '2em',
                         'left': '23em',
@@ -103,7 +103,7 @@
 
                         'width': '23em',
                     },
-                    css_luwh_other: {
+                    css_syno_other: {
                         'position': 'absolute',
                         'margin': '2em',
                         'left': '50em',
@@ -111,13 +111,13 @@
 
                         'width': '23em',
                     },
-                    css_luwh_devinfo: {
+                    css_syno_devinfo: {
                         'position': 'absolute',
                         'margin': '2em',
                         'left': '52em',
                         'top': '9.5em',
                     },
-                    css_luwh_log: {
+                    css_syno_log: {
                         'position': 'absolute',
                         'margin': '2em',
                         'left': '22em',

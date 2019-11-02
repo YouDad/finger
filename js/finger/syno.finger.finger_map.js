@@ -99,7 +99,7 @@
         },
     };
 
-    Vue.component('luwh_finger_map', {
+    Vue.component('syno_finger_map', {
         template, computed, methods,
         data: data_css,
         created: function () {
