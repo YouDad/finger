@@ -34,7 +34,7 @@
                 let filename = window.location.pathname.split("/").pop();
                 filename = filename.toLowerCase();
                 if (filename != "gd32.html") {
-                    // window.location.href = path_join(__project, "html", "gd32.html");
+                    window.location.href = path_join(__project, "html", "gd32.html");
                 }
             } else {
                 let filename = window.location.pathname.split("/").pop();
@@ -46,7 +46,7 @@
         }
     };
 
-    Vue.component('syno_header', {
+    Vue.component('luwh_header', {
         template: template,
         methods: methods,
     });

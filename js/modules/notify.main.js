@@ -17,7 +17,7 @@
         }
     };
 
-    Vue.component('syno_notify', {
+    Vue.component('luwh_notify', {
         template: template,
         data: data_css,
         created: function () {

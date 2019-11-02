@@ -2,12 +2,88 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="../css/bootstrap.min.css">
-	<script src="../js/functions.js" type="text/javascript"></script>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/tooltip.css">
+    <link rel="stylesheet" href="../css/animate.css">
+    <link rel="stylesheet" href="../css/main.css">
 </head>
 
 <body>
+    <div id="vue" :style="css_div">
+        <luwh_header :style="css_luwh_header"></luwh_header>
+        <div class="row" :style="css_content">
+            <luwh_notify :style="css_luwh_notify"></luwh_notify>
+            <luwh_image class="col-xs-2" :style="css_luwh_image"></luwh_image>
+            <luwh_log class="col-xs-10" :style="css_luwh_log"></luwh_log>
+        </div>
+    </div>
+
+    <script src="../js/functions.js" type="text/javascript"></script>
+    <script>
+        $loadjs("js/framework");
+        $loadjs("js/modules");
+        $loadjs("js/connect");
+        $loadjs("js/finger");
+        $loadjs("js/other");
+        let dependencies = [
+            'window.Vue.options["components"]["luwh_header"]',
+            'window.Vue.options["components"]["luwh_image"]',
+        ];
+        $wait(dependencies, function () {
+            var vm = new Vue({
+                el: "#vue",
+                data: {
+                    css_div: {
+                        '-webkit-user-select': 'none',
+                        'overflow-x': 'hidden',
+                        'position': 'absolute',
+                        'left': '0',
+                        'top': '0',
+                        'right': '0',
+                        'bottom': '0',
+                    },
+                    css_luwh_notify: {
+                        'pointer-events': 'none',
+                    },
+                    css_luwh_header: {
+                        'position': 'absolute',
+                        'left': '0',
+                        'right': '0',
+                        'top': '0',
+                        'height': '3em',
+                    },
+                    css_content: {
+                        'position': 'absolute',
+                        'overflow': 'auto',
+                        'top': '3em',
+                        'left': '0em',
+                        'right': '0em',
+                        'bottom': '0em',
+                    },
+
+
+                    css_luwh_image: {
+                        'position': 'absolute',
+                        'margin': '2em',
+                        'left': '0em',
+                        'top': '0em',
+
+                        'width': '21em',
+                        'height': '23em',
+                    },
+                    css_luwh_log: {
+                        'position': 'absolute',
+                        'margin': '2em',
+                        'left': '22em',
+                        'top': '27em',
+
+                        'width': '52em',
+                    },
+                },
+            });
+        });
+    </script>
 </body>
 
 </html>

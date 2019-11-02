@@ -11,15 +11,15 @@
 
 <body>
     <div id="vue" :style="css_div">
-        <syno_header :style="css_syno_header"></syno_header>
+        <luwh_header :style="css_luwh_header"></luwh_header>
         <div class="row" :style="css_content">
-            <syno_notify :style="css_syno_notify"></syno_notify>
-            <syno_image class="col-xs-2" :style="css_syno_image"></syno_image>
+            <luwh_notify :style="css_luwh_notify"></luwh_notify>
+            <luwh_image class="col-xs-2" :style="css_luwh_image"></luwh_image>
             <syno_connect id="a" class="con-xs-3" :style="css_syno_connect"></syno_connect>
             <syno_finger class="col-xs-3" :style="css_syno_finger"></syno_finger>
             <syno_other class="col-xs-3" :style="css_syno_other"></syno_other>
             <syno_devinfo class="col-xs-3" :style="css_syno_devinfo"></syno_devinfo>
-            <syno_log class="col-xs-10" :style="css_syno_log"></syno_log>
+            <luwh_log class="col-xs-10" :style="css_luwh_log"></luwh_log>
         </div>
     </div>
 
@@ -32,10 +32,10 @@
         $loadjs("js/other");
         let dependencies = [
             'window.Vue.options["components"]["syno_connect"]',
-            'window.Vue.options["components"]["syno_header"]',
+            'window.Vue.options["components"]["luwh_header"]',
             'window.Vue.options["components"]["syno_devinfo"]',
             'window.Vue.options["components"]["syno_finger"]',
-            'window.Vue.options["components"]["syno_image"]',
+            'window.Vue.options["components"]["luwh_image"]',
             'window.Vue.options["components"]["syno_other"]',
         ];
         $wait(dependencies, function () {
@@ -51,10 +51,10 @@
                         'right': '0',
                         'bottom': '0',
                     },
-                    css_syno_notify: {
+                    css_luwh_notify: {
                         'pointer-events': 'none',
                     },
-                    css_syno_header: {
+                    css_luwh_header: {
                         'position': 'absolute',
                         'left': '0',
                         'right': '0',
@@ -71,7 +71,7 @@
                     },
 
 
-                    css_syno_image: {
+                    css_luwh_image: {
                         'position': 'absolute',
                         'margin': '2em',
                         'left': '0em',
@@ -117,7 +117,7 @@
                         'left': '52em',
                         'top': '9.5em',
                     },
-                    css_syno_log: {
+                    css_luwh_log: {
                         'position': 'absolute',
                         'margin': '2em',
                         'left': '22em',
