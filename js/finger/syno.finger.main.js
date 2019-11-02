@@ -24,8 +24,6 @@
         </div>
     `;
 
-
-
     let data_css = function () {
         return {
             css_div: {

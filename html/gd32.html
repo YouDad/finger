@@ -15,6 +15,10 @@
         <div class="row" :style="css_content">
             <luwh_notify :style="css_luwh_notify"></luwh_notify>
             <luwh_image class="col-xs-2" :style="css_luwh_image"></luwh_image>
+            <luwh_connect id="a" class="con-xs-3" :style="css_luwh_connect"></luwh_connect>
+            <gd32_finger class="col-xs-3" :style="css_gd32_finger"></gd32_finger>
+            <gd32_register class="col-xs-3" :style="css_gd32_register"></gd32_register>
+            <gd32_devinfo class="col-xs-3" :style="css_gd32_devinfo"></gd32_devinfo>
             <luwh_log class="col-xs-10" :style="css_luwh_log"></luwh_log>
         </div>
     </div>
@@ -71,6 +75,33 @@
 
                         'width': '21em',
                         'height': '23em',
+                    },
+                    css_luwh_connect: {
+                        'position': 'absolute',
+                        'margin': '2em',
+                        'left': '0em',
+                        'top': '24em',
+
+                        'width': '21em',
+                        'height': '21em',
+                    },
+                    css_gd32_finger: {
+                        'position': 'absolute',
+                        'margin': '2em',
+                        'left': '23em',
+                        'top': '0em',
+                    },
+                    css_gd32_register: {
+                        'position': 'absolute',
+                        'margin': '2em',
+                        'left': '23em',
+                        'top': '11em',
+                    },
+                    css_gd32_devinfo: {
+                        'position': 'absolute',
+                        'margin': '2em',
+                        'left': '52em',
+                        'top': '0em',
                     },
                     css_luwh_log: {
                         'position': 'absolute',

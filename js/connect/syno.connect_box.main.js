@@ -42,7 +42,7 @@
         };
     };
 
-    Vue.component('syno_connect', {
+    Vue.component('luwh_connect', {
         template: template,
         data: css,
     });
