@@ -8,8 +8,8 @@
                 baudRate: parseInt(data.baud),
             });
             this.port.on("error", err => {
-                $log(`$port.error: ${err.message}`, "error");
-                $test_log(`$port.error: ${err.message}`, "error");
+                $log(`$port.error: ${err.message}`, "danger");
+                $test_log(`$port.error: ${err.message}`, "danger");
             });
             this.port.on("disconnect", () => {
                 $log(`$port.disconnect: ${this.port.path}`);

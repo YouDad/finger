@@ -9,12 +9,12 @@
             <template v-for="base in range(items.length/16)">
                 <div :style="css_line" v-show="show(base)">
                     <button class="btn hint--top" v-for="(item, index) in items.slice(base*16+0,base*16+8)"
-                    :aria-label="tooltip(base*16+0+index, item)" @click="set_finger_id(base*16+0+index)"
+                    :aria-label="tooltip(base*16+0+index, item)" @click="icc_set_finger_id(base*16+0+index)"
                     :class="{'btn-primary':item!=0,'btn-default':item==0}" :style="css_button"></button>
                 </div>
                 <div :style="css_after" v-show="show(base)">
                     <button class="btn hint--top" v-for="(item, index) in items.slice(base*16+8,base*16+16)"
-                    :aria-label="tooltip(base*16+8+index, item)" @click="set_finger_id(base*16+8+index)"
+                    :aria-label="tooltip(base*16+8+index, item)" @click="icc_set_finger_id(base*16+8+index)"
                     :class="{'btn-primary':item!=0,'btn-default':item==0}" :style="css_button"></button>
                 </div>
             </template>
@@ -77,9 +77,6 @@
                 return this.NowPage += offset - 1;
             }
         },
-        set_finger_id: function (finger_id) {
-            $bus.$emit("set_finger_id", { finger_id });
-        },
         range: function (start, end) {
             if (end === undefined) {
                 end = start;
@@ -106,7 +103,7 @@
         },
         mounted: function () {
             let that = this;
-            $bus.$on("set_map", arr => that.items = arr);
+            icc_define_icc("set_map", arr => that.items = arr);
         },
     });
 }

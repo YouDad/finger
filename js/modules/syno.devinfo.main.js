@@ -318,7 +318,7 @@
         methods: methods,
         computed: computed,
         created: function () {
-            $bus.$on("set_devinfo", r => {
+            icc_define_icc("set_devinfo", r => {
                 r = r.data;
                 this.devinfo_word = [];
                 this.devinfo_str = "";
@@ -330,10 +330,10 @@
                     }
                 }
             });
-            $bus.$on("get_dbsize", dbsize => {
+            icc_define_icc("get_dbsize", dbsize => {
                 dbsize.dbsize = this.DataBaseSize;
             });
-            $bus.$on("get_devinfo", async () => {
+            icc_define_icc("get_devinfo", async () => {
                 await this.flash_devinfo();
             });
         },

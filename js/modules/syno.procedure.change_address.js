@@ -32,7 +32,7 @@
             $log($syno.explain(result.retval));
             $user_log(`修改地址(${this.data.see})：${$syno.explain(result.retval)}`, result.retval ? "danger" : "info");
             if (!result.retval) {
-                await $bus.$emit("set_address", { address: this.data.use });
+                await icc_set_address(this.data.use);
             }
             $procedure.add("$syno.get_devinfo");
             $procedure.kill();

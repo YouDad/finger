@@ -49,8 +49,8 @@
                      $procedure.load("$syno.vfy_pwd").exec();
                 }
             };
-            await $bus.$emit("get_baud", data);
-            await $bus.$emit("get_device", data);
+            data.baud = await icc_get_baud();
+            data.device = await icc_get_device();
 
             $port.open(data);
             that.is_connected = true;
@@ -67,10 +67,10 @@
         data: data_css,
         methods: methods,
         created: function () {
-            $bus.$on("get_address", data => data.address = this.address);
-            $bus.$on("get_password", data => data.password = this.password);
-            $bus.$on("set_address", data => this.address = data.address);
-            $bus.$on("connect_failed", data => this.is_connected = false);
+            icc_define_icc("get_address", data => data.address = this.address);
+            icc_define_icc("get_password", data => data.password = this.password);
+            icc_define_icc("set_address", data => this.address = data.address);
+            icc_define_icc("connect_failed", data => this.is_connected = false);
         },
     });
 }

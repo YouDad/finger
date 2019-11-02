@@ -2,9 +2,7 @@
     let procedures = {
         finger_id: 0,
         "begin": async function () {
-            let finger_id = {};
-            await $bus.$emit("get_finger_id", finger_id);
-            this.finger_id = finger_id.finger_id;
+            this.finger_id = await icc_get_finger_id();
 
             let datas = [this.finger_id / 256, this.finger_id % 256, 0, 1];
 

@@ -56,7 +56,7 @@
         methods: methods,
         created: function () {
             let that = this;
-            $bus.$on("get_device", function (data) {
+            icc_define_icc("get_device", function (data) {
                 data.device = that.device.split(" ")[0];
             });
         },

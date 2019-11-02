@@ -37,7 +37,7 @@
         methods: methods,
         watch: watch,
         created: function () {
-            $bus.$on("leds_back", ()=>this.leds=this.backup);
+            icc_define_icc("leds_back", ()=>this.leds=this.backup);
         },
         mounted: function () {
 

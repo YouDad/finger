@@ -27,7 +27,7 @@
             let result = $syno.parse(data);
             $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
-                $bus.$emit("show_image", result);
+                icc_show_image(result);
 
                 let data_package = (await $syno.request($syno.GenChar, [0x01]))[0];
                 $port.write(data_package);
@@ -40,9 +40,7 @@
             let result = $syno.parse(data);
             $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
-                let dbsize = {};
-                await $bus.$emit("get_dbsize", dbsize);
-                dbsize = dbsize.dbsize;
+                dbsize = await icc_get_dbsize();
 
                 let datas = [0x01, 0, 0, dbsize / 256, dbsize % 256];
 

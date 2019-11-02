@@ -2,9 +2,7 @@
     let procedures = {
         interval_id: null,
         "begin": async function () {
-            let password = {};
-            await $bus.$emit("get_password", password);
-            password = password.password;
+            password = await icc_get_password();
 
             let datas = [];
             datas.push(parseInt(password.slice(0, 2), 16));

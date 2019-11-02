@@ -3,9 +3,7 @@
         dbsize: 0,
         next: 0,
         "begin": async function () {
-            let dbsize = {};
-            await $bus.$emit("get_dbsize", dbsize);
-            this.dbsize = dbsize.dbsize;
+            this.dbsize = await icc_get_dbsize();
             this.next = 0;
             $procedure.next("request").exec();
         },
@@ -49,7 +47,7 @@
                         bool_list.push(0);
                     }
                 }
-                $bus.$emit("set_map", bool_list);
+                icc_set_finger_map(bool_list);
             }
             $procedure.next("request").exec();
         },

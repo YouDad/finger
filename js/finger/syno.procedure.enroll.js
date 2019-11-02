@@ -25,7 +25,7 @@
             let result = $syno.parse(data);
             $log("UpImage" + $syno.explain(result.retval));
             if (result.retval == 0x00) {
-                $bus.$emit("show_image", result);
+                $icc_show_image(result);
 
                 let data_package = (await $syno.request($syno.GenChar, [this.buffer_id]))[0];
                 $port.write(data_package);
@@ -39,9 +39,7 @@
             let result = $syno.parse(data);
             $log("GenChar" + $syno.explain(result.retval));
             if (result.retval == 0x00) {
-                let dbsize = {};
-                await $bus.$emit("get_dbsize", dbsize);
-                dbsize = dbsize.dbsize;
+                dbsize = await icc_get_dbsize();
 
                 let datas = [this.buffer_id, 0, 0, dbsize / 256, dbsize % 256];
 
@@ -91,9 +89,7 @@
             let result = $syno.parse(data);
             $log("RegModel" + $syno.explain(result.retval));
             if (result.retval == 0x00) {
-                let finger_id = {};
-                await $bus.$emit("get_finger_id", finger_id);
-                finger_id = finger_id.finger_id;
+                finger_id = await icc_get_finger_id();
 
                 let datas = [1, finger_id / 256, finger_id % 256];
 

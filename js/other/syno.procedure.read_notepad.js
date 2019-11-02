@@ -19,10 +19,10 @@
                 this.data.push(result.data[i]);
             }
 
-            $bus.$emit("notepad_progress", this.data.length / 32 / 16 * 100);
+            icc_set_notepad_progress(this.data.length / 32 / 16 * 100);
 
             if (this.data.length === 512) {
-                $bus.$emit("notepad", this.data);
+                icc_set_notepad(this.data);
                 $user_log(`读记事本：${$syno.explain(result.retval)}`,
                     result.retval ? "danger" : "success");
                 $procedure.kill();

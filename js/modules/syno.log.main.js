@@ -63,7 +63,7 @@
         computed: computed,
         created: function () {
             let that = this;
-            $bus.$on("log", function (log) {
+            icc_define_icc("log", function (log) {
                 let logs;
                 switch (log.type) {
                     case "info":
@@ -99,29 +99,4 @@
             });
         },
     });
-
-    function $user_log(message, type = "info") {
-        $bus.$emit("log", {
-            message: message,
-            type: type,
-            level: 0,
-        });
-        $bus.$emit(`notify.${type}`, message);
-    }
-
-    function $test_log(message, type = "info") {
-        $bus.$emit("log", {
-            message: message,
-            type: type,
-            level: 1,
-        });
-    }
-
-    function $log(message, type = "info") {
-        $bus.$emit("log", {
-            message: message,
-            type: type,
-            level: 2,
-        });
-    }
 }

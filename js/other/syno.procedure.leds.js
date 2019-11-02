@@ -13,7 +13,7 @@
             $user_log(`控制LED灯(${this.data.toString(2)})结果：` + $syno.explain(result.retval),
                 result.retval ? "danger" : "success");
             if (result.retval != 0) {
-                $bus.$emit("leds_back");
+                icc_leds_back();
             }
             $procedure.kill();
         },

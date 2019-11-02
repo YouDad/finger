@@ -88,8 +88,8 @@
         data: data_css,
         methods: methods,
         created: function () {
-            $bus.$on("get_finger_id", finger_id => finger_id.finger_id = this.finger_id);
-            $bus.$on("set_finger_id", finger_id => this.finger_id = finger_id.finger_id);
+            icc_define_icc("get_finger_id", finger_id => finger_id.finger_id = this.finger_id);
+            icc_define_icc("set_finger_id", finger_id => this.finger_id = finger_id.finger_id);
         },
     });
 }

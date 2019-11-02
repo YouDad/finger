@@ -32,10 +32,10 @@
                     that.$delete(that.notify_text, text_id);
                 }, 1500);
             }
-            $bus.$on("notify.success", text => notify(text, "alert-success"));
-            $bus.$on("notify.info", text => notify(text, "alert-info"));
-            $bus.$on("notify.warning", text => notify(text, "alert-warning"));
-            $bus.$on("notify.danger", text => notify(text, "alert-danger"));
+            icc_define_icc("notify.success", text => notify(text, "alert-success"));
+            icc_define_icc("notify.info", text => notify(text, "alert-info"));
+            icc_define_icc("notify.warning", text => notify(text, "alert-warning"));
+            icc_define_icc("notify.danger", text => notify(text, "alert-danger"));
         },
     });
 }

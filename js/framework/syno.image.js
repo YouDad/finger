@@ -1,5 +1,5 @@
 {
-    $bus.$on("convert_image", async function (result) {
+    icc_define_icc("convert_image", async function (result) {
         const canvas = $canvas.createCanvas(160, 160);
         const ctx = canvas.getContext('2d');
         const arr = new Uint8ClampedArray(4 * 160 * 160);
@@ -12,10 +12,8 @@
         let imageData = $canvas.createImageData(arr, 160);
         ctx.putImageData(imageData, 0, 0);
         result.src = canvas.toDataURL();
-        let is_save_image = {};
-        await $bus.$emit("is_save_image", is_save_image);
-        if (is_save_image.is_save_image) {
-            $bus.$emit("save_png", canvas.toBuffer());
+        if (await icc_is_save_image()) {
+            icc_save_png(canvas.toBuffer());
         }
     });
 }

@@ -26,7 +26,7 @@
             let result = $syno.parse(data);
             $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
-                $bus.$emit("show_image", result);
+                icc_show_image(result);
             }
             $user_log("采图成功", "success");
             if (this.continued) {

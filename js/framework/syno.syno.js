@@ -2,9 +2,7 @@
     window.$syno = {
         _package_header_length: 12,
         request: async function (code, param = [], data = []) {
-            let address = {};
-            await $bus.$emit("get_address", address);
-            address = address.address;
+            address = await icc_get_address();
 
             let data_packages = [];
             let datas = this.split(data);

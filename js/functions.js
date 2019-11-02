@@ -11,7 +11,7 @@ function $wait(names, func) {
             clearInterval(interval_id);
             func && func.call();
         } else {
-            $log("$wait names is not Array", "error");
+            $log("$wait names is not Array", "danger");
         }
     }, 100);
 }
@@ -45,4 +45,8 @@ function range(start, end) {
         ret.push(i);
     }
     return ret;
+}
+
+function icc_define_icc(name, callback) {
+    $bus.$on(name, callback);
 }

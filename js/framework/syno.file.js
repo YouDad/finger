@@ -18,7 +18,7 @@
     make_sure_dir_exist(char_dir);
     make_sure_dir_exist(image_dir);
 
-    $bus.$on("save_char", function (data) {
+    icc_define_icc("save_char", function (data) {
         let fd;
         try {
             let filename = path_join(char_dir, `${get_filename()}_${data.finger_id}.char`);
@@ -35,7 +35,7 @@
         }
     });
 
-    $bus.$on("save_png", function (buffer) {
+    icc_define_icc("save_png", function (buffer) {
         let fd;
         try {
             let filename = path_join(image_dir, get_filename() + ".png");
@@ -52,7 +52,7 @@
         }
     });
 
-    $bus.$on("open_explorer", function (data) {
+    icc_define_icc("open_explorer", function (data) {
         exec(`explorer ${base_dir}`);
     });
 }

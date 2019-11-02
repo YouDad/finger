@@ -2,9 +2,7 @@
     let procedures = {
         finger_id: 0,
         "begin": async function (message) {
-            let finger_id = {};
-            await $bus.$emit("get_finger_id", finger_id);
-            this.finger_id = finger_id.finger_id;
+            this.finger_id = await icc_get_finger_id();
 
             let datas = [2, this.finger_id / 256, this.finger_id % 256];
 
@@ -31,7 +29,7 @@
             $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
                 result.finger_id = this.finger_id;
-                $bus.$emit("save_char", result);
+                icc_save_char(result);
                 $procedure.next("end").exec();
             } else {
                 $procedure.next("end").exec("上传特征失败");

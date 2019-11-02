@@ -5,9 +5,7 @@
             if (message === true) {
                 this.continued = true;
             }
-            let finger_id = {};
-            await $bus.$emit("get_finger_id", finger_id);
-            finger_id = finger_id.finger_id;
+            finger_id = await icc_get_finger_id();
 
             let datas = [2, finger_id / 256, finger_id % 256];
 
@@ -47,7 +45,7 @@
             let result = $syno.parse(data);
             $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
-                $bus.$emit("show_image", result);
+                icc_show_image(result);
 
                 let data_package = (await $syno.request($syno.GenChar, [0x01]))[0];
                 $port.write(data_package);

@@ -29,7 +29,7 @@
         data: data,
         methods: methods,
         created: function () {
-            $bus.$on("get_baud", baud => baud.baud = this.baud);
+            icc_define_icc("get_baud", baud => baud.baud = this.baud);
         },
     });
 }

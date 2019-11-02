@@ -6,7 +6,7 @@
                 <input type="checkbox" v-model="save_image">
                 保存图像
             </label>
-            <button class="btn btn-default" style="margin-left: 3em" @click="open_explorer">打开图像文件夹</button>
+            <button class="btn btn-default" style="margin-left: 3em" @click="icc_open_explorer">打开图像文件夹</button>
         </div>
     `;
 
@@ -25,22 +25,14 @@
         }
     };
 
-    let methods = {
-        open_explorer: function () {
-            $bus.$emit("open_explorer");
-        },
-    }
-
     Vue.component('syno_image', {
         template: template,
         data: data_css,
-        methods: methods,
         created: function () {
-            $bus.$on("show_image", async  result => {
-                await $bus.$emit("convert_image", result);
-                this.image_src = result.src;
+            icc_define_icc("show_image", async result => {
+                this.image_src = await icc_convert_image(result);
             });
-            $bus.$on("is_save_image", result => result.is_save_image = this.save_image);
+            icc_define_icc("is_save_image", result => result.is_save_image = this.save_image);
         },
     });
 }

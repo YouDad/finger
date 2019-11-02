@@ -195,8 +195,8 @@
         data: data_css,
         methods: methods,
         created: function () {
-            $bus.$on("notepad", text => this.text = text);
-            $bus.$on("notepad_progress", progress => this.progress = progress.toString(10) + "%");
+            icc_define_icc("notepad", text => this.text = text);
+            icc_define_icc("notepad_progress", progress => this.progress = progress.toString(10) + "%");
         },
         mounted: function () {
 
