@@ -30,7 +30,7 @@
                     clearInterval(id);
                     that.$delete(that.css_alert, text_id);
                     that.$delete(that.notify_text, text_id);
-                }, 2000);
+                }, 1500);
             }
             $bus.$on("notify.success", text => notify(text, "alert-success"));
             $bus.$on("notify.info", text => notify(text, "alert-info"));
