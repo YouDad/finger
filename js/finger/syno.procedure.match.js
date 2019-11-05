@@ -12,7 +12,7 @@
             let data_package = (await $syno.request($syno.LoadChar, datas))[0];
             $port.write(data_package);
             $procedure.next("get_image");
-            if (message) {
+            if (typeof (message) !== "boolean") {
                 $user_log(message, "warning");
             }
         },
@@ -31,8 +31,10 @@
             let result = $syno.parse(data);
             $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
-                let data_package = (await $syno.request($syno.UpImage))[0];
-                $port.write(data_package);
+                if (await icc_is_save_image()) {
+                    let data_package = (await $syno.request($syno.UpImage))[0];
+                    $port.write(data_package);
+                }
                 $procedure.next("show_image");
             } else {
                 let data_package = (await $syno.request($syno.GetImage))[0];
@@ -70,7 +72,7 @@
             let result = $syno.parse(data);
             $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
-                $log(`分数: ${result.data[0] * 256 + result.data[1]}`);
+                $user_log(`分数：${result.data[0] * 256 + result.data[1]}`);
                 $procedure.next("end").exec();
             } else {
                 //匹配失败
@@ -82,7 +84,7 @@
             if (message) {
                 $user_log(message, "danger");
             } else {
-                $log("比对成功", "success");
+                $user_log("比对：成功", "success");
             }
             if (this.continued) {
                 $procedure.next("begin").exec();

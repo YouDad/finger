@@ -39,8 +39,5 @@
         created: function () {
             icc_define_icc("leds_back", ()=>this.leds=this.backup);
         },
-        mounted: function () {
-
-        },
     });
 }

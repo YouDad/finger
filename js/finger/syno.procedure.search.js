@@ -8,7 +8,7 @@
             let data_package = (await $syno.request($syno.GetImage))[0];
             $port.write(data_package);
             $procedure.next("up_image");
-            if (message) {
+            if (typeof (message) !== "boolean") {
                 $user_log(message, "warning");
             }
         },
@@ -16,8 +16,10 @@
             let result = $syno.parse(data);
             $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
-                let data_package = (await $syno.request($syno.UpImage))[0];
-                $port.write(data_package);
+                if (await icc_is_save_image()) {
+                    let data_package = (await $syno.request($syno.UpImage))[0];
+                    $port.write(data_package);
+                }
                 $procedure.next("show_image");
             } else {
                 $procedure.next("begin").exec($syno.explain(result.retval));

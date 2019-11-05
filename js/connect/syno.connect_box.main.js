@@ -27,7 +27,7 @@
             css_syno_serial_connect: {
                 'padding': '0.25em',
                 'width': '100%',
-                'margin-top': '2em',
+                'margin-top': '1em',
             },
             css_syno_chdev_pwd: {
                 'padding': '0.25em',

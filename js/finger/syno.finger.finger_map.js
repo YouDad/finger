@@ -88,6 +88,9 @@
             }
             return ret;
         },
+        icc_set_finger_id:function (x) {
+            icc_set_finger_id(x);
+        }
     };
 
     let computed = {

@@ -25,9 +25,16 @@
         }
     };
 
+    let methods = {
+        icc_open_explorer: function () {
+            icc_open_explorer();
+        },
+    };
+
     Vue.component('luwh_image', {
         template: template,
         data: data_css,
+        methods: methods,
         created: function () {
             icc_define_icc("show_image", async result => {
                 this.image_src = await icc_convert_image(result);

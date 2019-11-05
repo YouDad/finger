@@ -114,7 +114,7 @@
         },
         explain: function (retval) {
             switch (retval) {
-                case 0x00: return "指令执行完毕或OK";
+                case 0x00: return "指令执行成功";
                 case 0x01: return "数据包接收错误";
                 case 0x02: return "传感器上没有手指";
                 case 0x03: return "录入指纹图像失败或录入面积不足";

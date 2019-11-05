@@ -74,28 +74,11 @@ async function icc_set_address(address) {
 }
 
 async function icc_set_devinfo(info) {
-    await $bus.$emit("save_devinfo", info);
+    await $bus.$emit("set_devinfo", info);
 }
 
 async function icc_leds_back() {
     await $bus.$emit("leds_back");
-}
-
-async function icc_notify(type, message) {
-    await $bus.$emit(`notify.${type}`, message);
-}
-
-async function $user_log(message, type = "info") {
-    await $bus.$emit("log", { message, type, level: 0, });
-    await icc_notify(type, message);
-}
-
-async function $test_log(message, type = "info") {
-    await $bus.$emit("log", { message, type, level: 1, });
-}
-
-async function $log(message, type = "info") {
-    await $bus.$emit("log", { message, type, level: 2, });
 }
 
 async function icc_set_notepad_progress(progress) {

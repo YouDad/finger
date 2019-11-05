@@ -188,7 +188,7 @@
                     str *= 65536;
                     str += this.devinfo_word[b];
                 }
-                str = str.toString(16);
+                str = str.toString(16).toUpperCase();
                 while (str.length < (b > 0 ? 8 : 4))
                     str = "0" + str;
                 str = "0x" + str;
@@ -197,16 +197,16 @@
         },
         change_secur_level: function () {
             let data = { see: this.temp_seclvl };
-            data.use = this.temp_seclvl[0];
+            data.use = parseInt(this.temp_seclvl[0], 10);
             $procedure.load("$syno.change_seclvl").exec(data);
         },
         change_packet_size: function () {
             let data = { see: this.temp_pktsize };
             switch (this.temp_pktsize) {
-                case "32": data.use = 0; break;
-                case "64": data.use = 1; break;
-                case "128": data.use = 2; break;
-                case "256": data.use = 3; break;
+                case 32: data.use = 0; break;
+                case 64: data.use = 1; break;
+                case 128: data.use = 2; break;
+                case 256: data.use = 3; break;
             }
             $procedure.load("$syno.change_pktsize").exec(data);
         },

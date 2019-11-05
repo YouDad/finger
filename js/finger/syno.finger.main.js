@@ -31,6 +31,7 @@
                 'padding': '1em',
                 'border': '0.5em solid #d9edf7',
                 'border-width': '0.5em',
+                'z-index': '1',
             },
             css_syno_get_image: {
                 'margin': '-1.3em 0.2em 0.5em',

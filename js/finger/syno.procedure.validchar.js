@@ -22,7 +22,7 @@
             $log($syno.explain(result.retval));
             if (result.retval) {
                 $user_log(`获取有效模板列表：` + $syno.explain(result.retval),
-                    result.retval ? "danger" : "info");
+                    result.retval ? "danger" : "success");
             } else {
                 list = [];
                 for (let i = 0; i < 32; i++) {

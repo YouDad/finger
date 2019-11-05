@@ -2,6 +2,7 @@
     let template = `
         <div :style="css_div">
             <div class="btn-group" :style="css_nav">
+                <button type="button" class="btn btn-default" @click="clear">清空日志</button>
                 <button type="button" class="btn btn-success" @click="log_type=0;">用户</button>
                 <button type="button" class="btn btn-warning" @click="log_type=1;">串口</button>
                 <button type="button" class="btn btn-danger" @click="log_type=2;">开发者</button>
@@ -41,7 +42,7 @@
             },
             css_nav: {
                 'border': '0.5em solid #d9edf7',
-                'margin-left': '36.57em',
+                'margin-left': '30.77em',
             },
             process_type: "progress-bar-info",
             log_type: 0,
@@ -57,10 +58,19 @@
         },
     };
 
+    let methods = {
+        clear: function () {
+            this.user_logs = [];
+            this.test_logs = [];
+            this.deve_logs = [];
+        },
+    };
+
     Vue.component('luwh_log', {
         template: template,
         data: data_css,
         computed: computed,
+        methods: methods,
         created: function () {
             let that = this;
             icc_define_icc("log", function (log) {

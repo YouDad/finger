@@ -30,7 +30,7 @@
         "process_retval": async function (data) {
             let result = $syno.parse(data);
             $log($syno.explain(result.retval));
-            $user_log(`修改地址(${this.data.see})：${$syno.explain(result.retval)}`, result.retval ? "danger" : "info");
+            $user_log(`修改地址(${this.data.see})：${$syno.explain(result.retval)},已生效`, result.retval ? "danger" : "success");
             if (!result.retval) {
                 await icc_set_address(this.data.use);
             }

@@ -13,11 +13,19 @@
             let result = $syno.parse(data);
             $log("GetEnrollImages" + $syno.explain(result.retval));
             if (result.retval == 0x00) {
-                let data_package = (await $syno.request($syno.UpImage))[0];
-                $port.write(data_package);
+                $user_log("请抬起手指");
+
+                if (await icc_is_save_image()) {
+                    let data_package = (await $syno.request($syno.UpImage))[0];
+                    $port.write(data_package);
+                }
                 $procedure.next("show_image");
             } else {
-                $procedure.next("begin").exec($syno.explain(result.retval));
+                if (result.retval == 0x02) {
+                    $procedure.next("begin").exec(`请按第${this.buffer_id}次手指`);
+                } else {
+                    $procedure.next("begin").exec($syno.explain(result.retval));
+                }
                 return;
             }
         },
@@ -25,7 +33,7 @@
             let result = $syno.parse(data);
             $log("UpImage" + $syno.explain(result.retval));
             if (result.retval == 0x00) {
-                $icc_show_image(result);
+                icc_show_image(result);
 
                 let data_package = (await $syno.request($syno.GenChar, [this.buffer_id]))[0];
                 $port.write(data_package);
@@ -89,6 +97,8 @@
             let result = $syno.parse(data);
             $log("RegModel" + $syno.explain(result.retval));
             if (result.retval == 0x00) {
+                $user_log("合并特征：" + $syno.explain(result.retval));
+
                 finger_id = await icc_get_finger_id();
 
                 let datas = [1, finger_id / 256, finger_id % 256];
@@ -105,6 +115,7 @@
             let result = $syno.parse(data);
             $log("StoreChar" + $syno.explain(result.retval));
             if (result.retval == 0x00) {
+                $user_log("存储特征：" + $syno.explain(result.retval));
                 $procedure.next("end").exec();
             } else {
                 $procedure.next("end").exec("存储失败");
@@ -116,7 +127,7 @@
             if (message) {
                 $user_log(message, "danger");
             } else {
-                $user_log("注册成功", "success");
+                $user_log("注册：成功", "success");
             }
 
             $procedure.add("$syno.validchar");

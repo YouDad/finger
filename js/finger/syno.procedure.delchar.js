@@ -14,7 +14,7 @@
             let result = $syno.parse(data);
             $log($syno.explain(result.retval));
             $user_log(`删除指纹${this.finger_id}：${$syno.explain(result.retval)}`,
-                result.retval ? "danger" : "info");
+                result.retval ? "danger" : "success");
 
             $procedure.add("$syno.validchar");
             $procedure.kill();
