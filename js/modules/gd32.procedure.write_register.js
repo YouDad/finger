@@ -1,7 +1,7 @@
 {
     let procedures = {
-        "begin": async function (address, value) {
-            let data_package = (await $gd32.request($gd32.ReadRegister, [address, value]))[0];
+        "begin": async function (data) {
+            let data_package = (await $gd32.request($gd32.WriteRegister, data))[0];
             $port.write(data_package);
             $user_log(`写入寄存器成功`, "success");
             $procedure.kill();

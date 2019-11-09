@@ -5,6 +5,7 @@
             <button :style="css_button" class="btn btn-default" @click="exec_procedure('$gd32.get_image', true)">连续原始</button>
             <button :style="css_button" class="btn btn-default" @click="exec_procedure('$gd32.test_image')">测试图像</button>
             <button :style="css_button" class="btn btn-default" @click="exec_procedure('$gd32.test_image', true)">连续测试</button>
+            <button :style="css_button" class="btn btn-warning" @click="exec_procedure('$syno.cancel')">取消指令</button>
         </div>
     `;
 

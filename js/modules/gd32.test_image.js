@@ -23,5 +23,5 @@
         },
     };
 
-    $procedure.define("$gd32.get_image", procedures);
+    $procedure.define("$gd32.test_image", procedures);
 }

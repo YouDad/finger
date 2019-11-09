@@ -1,10 +1,10 @@
 {
     let template = `
         <div :style="css_div">
-            <luwh_bauds :style="css_luwh_bauds" v-show="show"></luwh_bauds>
+            <gd32_bauds :style="css_gd32_bauds" v-show="show"></gd32_bauds>
             <luwh_devices :style="css_luwh_devices" v-show="show"></luwh_devices>
 
-            <syno_serial_connect :style="css_syno_serial_connect" v-show="show"></syno_serial_connect>
+            <gd32_serial_connect :style="css_gd32_serial_connect" v-show="show"></gd32_serial_connect>
         </div>
     `;
 
@@ -16,7 +16,7 @@
                 'border': '0.5em solid #d9edf7',
                 'display': 'inline-block',
             },
-            css_luwh_bauds: {
+            css_gd32_bauds: {
                 'padding': '0.25em',
                 'width': '100%',
             },
@@ -24,7 +24,7 @@
                 'padding': '0.25em',
                 'width': '100%',
             },
-            css_syno_serial_connect: {
+            css_gd32_serial_connect: {
                 'padding': '0.25em',
                 'width': '100%',
                 'margin-top': '1em',
@@ -33,7 +33,7 @@
         };
     };
 
-    Vue.component('syno_connect', {
+    Vue.component('gd32_connect', {
         template: template,
         data: css,
     });

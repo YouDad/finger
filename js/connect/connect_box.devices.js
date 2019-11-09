@@ -50,7 +50,7 @@
         },
     };
 
-    Vue.component('syno_devices', {
+    Vue.component('luwh_devices', {
         template: template,
         data: data_css,
         methods: methods,

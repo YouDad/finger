@@ -16,8 +16,6 @@
         </div>
     `;
 
-
-
     let data_css = function () {
         return {
             css_div: {
@@ -35,13 +33,6 @@
             css_input: {
                 'display': 'inline-table',
                 'width': '48%',
-            },
-            exec_procedure: function (name, continued) {
-                if (continued === undefined) {
-                    $procedure.load(name).exec();
-                } else {
-                    $procedure.load(name).exec(continued);
-                }
             },
             address: "",
             value: "",
@@ -62,7 +53,7 @@
                 $user_log("地址为空，读取失败", "danger");
             } else {
                 $procedure.load("$gd32.write_register")
-                    .exec(parseInt(this.address, 16), parseInt(this.value, 16));
+                    .exec([parseInt(this.address, 16), parseInt(this.value, 16)]);
             }
         }
     };
@@ -72,7 +63,7 @@
         data: data_css,
         methods: methods,
         created: function () {
-            icc_define_icc("set_value", data => this.value = data.value);
+            icc_define_icc("set_value", data => this.value = "0x" + data.value.toString(16).toUpperCase());
         }
     });
 }

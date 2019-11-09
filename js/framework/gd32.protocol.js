@@ -9,7 +9,7 @@
             let password = await icc_get_password();
 
             let data_packages = [];
-            let datas = this.split(data);
+            let datas = this.split(param.concat(data));
             for (let i = 0; i < datas.length; i++) {
                 data_packages.push(this.convert({
                     sign: i == datas.length - 1 ? sign_data_end : sign_data_not_end,
@@ -24,6 +24,9 @@
         },
         split: function (data) {
             if (data instanceof Array) {
+                if (data.length === 0) {
+                    return [[]];
+                }
                 //get size
                 let ret = [];
                 let size = 126;
@@ -56,7 +59,7 @@
             for (let data of package.data) {
                 data_package.push(data);
             }
-            let sum = this.GetCRC16(package.data, 0, package.data.length + _package_header_length);
+            let sum = this.GetCRC16(data_package);
             data_package.push(sum % 256);
             data_package.push(Math.floor(sum / 256));
             return data_package;
@@ -74,30 +77,46 @@
                 data: []
             };
 
-            ret.address += (datas[2] < 16 ? "0" : "") + datas[2].toString(16);
-            ret.address += (datas[3] < 16 ? "0" : "") + datas[3].toString(16);
-            ret.address += (datas[4] < 16 ? "0" : "") + datas[4].toString(16);
-            ret.address += (datas[5] < 16 ? "0" : "") + datas[5].toString(16);
-            ret.password += (datas[6] < 16 ? "0" : "") + datas[6].toString(16);
-            ret.password += (datas[7] < 16 ? "0" : "") + datas[7].toString(16);
-            ret.password += (datas[8] < 16 ? "0" : "") + datas[8].toString(16);
-            ret.password += (datas[9] < 16 ? "0" : "") + datas[9].toString(16);
-            ret.cmd = datas[12] * 256 + datas[13];
-            ret.ack = datas[17] * 256 + datas[18];
-
             while (datas.length) {
+                if (datas[0] == "LOG".charCodeAt(0) &&
+                    datas[1] == "LOG".charCodeAt(1) &&
+                    datas[2] == "LOG".charCodeAt(2)) {
+                    let len = datas[6] * 256 + datas[5];
+                    let msg = "";
+                    for (let i = 8; i < 8 + len; i++) {
+                        msg += String.fromCharCode(datas[i]);
+                    }
+                    icc_notify("info", msg);
+                    datas = datas.slice(8 + len);
+                    continue;
+                }
                 if (datas[0] != 0xef || datas[1] != 0x02) {
                     $log("$gd32.parse failed, not EF02", "danger");
                     throw "$gd32.parse failed, not EF02";
                 }
-                let len = datas[15] * 256 + datas[16];
+                ret.address = (datas[2] < 16 ? "0" : "") + datas[2].toString(16);
+                ret.address += (datas[3] < 16 ? "0" : "") + datas[3].toString(16);
+                ret.address += (datas[4] < 16 ? "0" : "") + datas[4].toString(16);
+                ret.address += (datas[5] < 16 ? "0" : "") + datas[5].toString(16);
+                ret.password = (datas[6] < 16 ? "0" : "") + datas[6].toString(16);
+                ret.password += (datas[7] < 16 ? "0" : "") + datas[7].toString(16);
+                ret.password += (datas[8] < 16 ? "0" : "") + datas[8].toString(16);
+                ret.password += (datas[9] < 16 ? "0" : "") + datas[9].toString(16);
+                ret.cmd = datas[13] * 256 + datas[12];
+                let len = datas[16] * 256 + datas[15];
+                ret.ack = datas[18] * 256 + datas[17];
 
-                for (let i = 0; i < len - 2; i++) {
+
+                for (let i = 0; i < len; i++) {
                     ret.data.push(datas[i + 19]);
                 }
                 // TODO: checksum
+                // TODO: fix Readregister no checksum
+                if (ret.cmd == this.ReadRegister) {
+                    len -= 2;
+                }
 
-                datas = datas.slice(len + 19);
+                datas = datas.slice(len + 19 + 2);
             }
 
             return ret;
@@ -137,10 +156,10 @@
             0x6e17, 0x7e36, 0x4e55, 0x5e74, 0x2e93, 0x3eb2, 0x0ed1, 0x1ef0
         ],
         //X16 + X12 + X5 + 1 余式表
-        GetCRC16: function (arr, start, end) {
+        GetCRC16: function (arr) {
             let result = 0;
-            for (let i = start; i < end; i++) {
-                result = (result << 8) ^ CRC16Table[(result >> 8) ^ arr[i]];
+            for (let i = 0; i < arr.length; i++) {
+                result = (result << 8) ^ this.CRC16Table[(result >> 8) ^ arr[i]];
                 result %= 1 << 16;
             }
             return result;

@@ -24,7 +24,7 @@
         },
     };
 
-    Vue.component('syno_bauds', {
+    Vue.component('luwh_bauds', {
         template: template,
         data: data,
         methods: methods,

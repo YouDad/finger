@@ -33,10 +33,20 @@
     };
 
     let computed = {
-        ChipVersion: function () { return devinfo_str.slice(0, 0 + 1); },
-        FirmVersion: function () { return devinfo_str.slice(1, 1 + 9); },
-        CompileDate: function () { return devinfo_str.slice(11, 11 + 11); },
-        CompileTime: function () { return devinfo_str.slice(23, 23 + 8); },
+        ChipVersion: function () {
+            let ver = this.devinfo_str.charCodeAt(0);
+            if (isNaN(ver)) {
+                ver = "";
+            } else if (ver === 255) {
+                ver = "Unknown";
+            } else {
+                ver = ver.toString();
+            }
+            return ver;
+        },
+        FirmVersion: function () { return this.devinfo_str.slice(1, 1 + 9); },
+        CompileDate: function () { return this.devinfo_str.slice(11, 11 + 11); },
+        CompileTime: function () { return this.devinfo_str.slice(23, 23 + 8); },
     };
 
     Vue.component('gd32_devinfo', {
