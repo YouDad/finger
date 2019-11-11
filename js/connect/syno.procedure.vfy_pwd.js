@@ -21,7 +21,6 @@
         },
         "process_vfy_pwd": function (data) {
             if (data === undefined) {
-                clearInterval(this.interval_id);
                 $user_log("验证密码超时", "danger");
             } else {
                 let result = $syno.parse(data);
@@ -33,6 +32,7 @@
                     $procedure.add('$syno.validchar');
                 }
             }
+            clearInterval(this.interval_id);
             $procedure.kill();
         },
     };
