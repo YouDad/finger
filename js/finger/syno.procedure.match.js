@@ -37,13 +37,21 @@
                 if (await icc_is_save_image()) {
                     let data_package = (await $syno.request($syno.UpImage))[0];
                     $port.write(data_package);
+                    $procedure.next("show_image");
+                } else {
+                    let data_package = (await $syno.request($syno.GenChar, [0x01]))[0];
+                    $port.write(data_package);
+                    $procedure.next("match");
                 }
-                $procedure.next("show_image");
             } else {
                 let data_package = (await $syno.request($syno.GetImage))[0];
                 $port.write(data_package);
                 $procedure.next("up_image");
-                $user_log($syno.explain(result.retval), "warning");
+                if (result.retval === 0x02) {
+                    $user_log("请按手指", "warning");
+                } else {
+                    $user_log($syno.explain(result.retval), "warning");
+                }
             }
         },
         "show_image": async function (data) {
