@@ -86,7 +86,7 @@
                     for (let i = 8; i < 8 + len; i++) {
                         msg += String.fromCharCode(datas[i]);
                     }
-                    icc_notify("info", msg);
+                    $user_log(msg, "info");
                     datas = datas.slice(8 + len);
                     continue;
                 }

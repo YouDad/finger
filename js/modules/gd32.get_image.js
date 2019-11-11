@@ -10,14 +10,19 @@
             } else if (continued !== undefined) {
                 $user_log(continued, "warning");
             }
+            $user_log("请放手指", "info");
             let data_package = (await $gd32.request($gd32.GetRawImage))[0];
             $port.write(data_package);
             $procedure.next("process_get_image");
         },
         "process_get_image": async function (data) {
             let result = $gd32.parse(data);
-            icc_show_image(result);
-            $user_log("采图成功", "success");
+            if (result.data.length > 0) {
+                icc_show_image(result);
+                $user_log("采图成功", "success");
+            } else {
+                $user_log("采图超时", "danger");
+            }
             if (this.continued) {
                 $procedure.next("begin").exec();
             } else {
