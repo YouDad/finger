@@ -1,6 +1,9 @@
 {
     let procedures = {
         continued: false,
+        "clean": async function () {
+            this.continued = false;
+        },
         "begin": async function (continued) {
             if (continued === true) {
                 this.continued = true;

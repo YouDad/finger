@@ -1,6 +1,6 @@
 {
     let procedures = {
-        interval_id: null,
+        interval_id: 0,
         "begin": async function () {
             password = await icc_get_password();
 

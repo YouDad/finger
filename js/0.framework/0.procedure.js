@@ -8,13 +8,16 @@ window.$procedure = {
         return $procedure;
     },
     load: function (name, start_step = "begin") {
-        if (!name || !this.procedures[name]) {
+        if (!name || !this.procedures.hasOwnProperty(name)) {
             $log(`load procedure ${name} failed. because no such procedure.`, "danger");
             return;
         }
-        if (!start_step || !this.procedures[name][start_step]) {
+        if (!start_step || !this.procedures[name].hasOwnProperty(start_step)) {
             $log(`load procedure ${name} failed. because no start_step:${start_step}.`, "danger");
             return;
+        }
+        if (this.hasOwnProperty("clean")) {
+            this.now_procedure["clean"]();
         }
 
         this.now_step = start_step;
@@ -39,7 +42,7 @@ window.$procedure = {
             $log("exec procedure failed. because no availiable procedure.", "danger");
             return;
         }
-        if (!this.now_procedure[this.now_step]) {
+        if (!this.now_procedure.hasOwnProperty(this.now_step)) {
             $log(`next procedure failed. ${this.now_procedure}["${this.now_step}"] is null, cannot be called.`, "warning");
         }
 
@@ -51,7 +54,7 @@ window.$procedure = {
             $log("next procedure failed. because no availiable procedure.", "danger");
             return;
         }
-        if (!this.now_procedure[step]) {
+        if (!this.now_procedure.hasOwnProperty(this.now_step)) {
             $log(`next procedure failed. ${this.now_procedure}["${step}"] is null, cannot be called.`, "warning");
         }
 
