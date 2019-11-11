@@ -150,6 +150,9 @@
         },
         keydown_hex: function (ev) {
             let num = parseInt(String.fromCharCode(ev.keyCode), 16);
+            if (ev.code.slice(0, 6) === "Numpad") {
+                num = parseInt(ev.code.slice(6, 7));
+            }
             if (this.key) {
                 if (!isNaN(num)) {
                     this.$set(this.text, this.cursor, this.text[this.cursor] * 16 + num);
