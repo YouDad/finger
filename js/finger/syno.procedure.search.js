@@ -22,8 +22,12 @@
                 if (await icc_is_save_image()) {
                     let data_package = (await $syno.request($syno.UpImage))[0];
                     $port.write(data_package);
+                    $procedure.next("show_image");
+                } else {
+                    let data_package = (await $syno.request($syno.GenChar, [0x01]))[0];
+                    $port.write(data_package);
+                    $procedure.next("search");
                 }
-                $procedure.next("show_image");
             } else {
                 $procedure.next("begin").exec($syno.explain(result.retval));
             }

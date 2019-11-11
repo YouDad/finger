@@ -21,8 +21,19 @@
                 if (await icc_is_save_image()) {
                     let data_package = (await $syno.request($syno.UpImage))[0];
                     $port.write(data_package);
+                    $procedure.next("show_image");
+                } else {
+                    if (result.retval == 0x00) {
+                        $user_log("采图成功", "success");
+                    } else {
+                        $user_log("采图失败：" + $syno.explain(result.retval), "danger");
+                    }
+                    if (this.continued) {
+                        $procedure.next("begin").exec();
+                    } else {
+                        $procedure.kill();
+                    }
                 }
-                $procedure.next("show_image");
             } else {
                 setTimeout(() => $procedure.next("begin").exec($syno.explain(result.retval)), 300);
             }
@@ -32,8 +43,10 @@
             $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
                 icc_show_image(result);
+                $user_log("采图成功", "success");
+            } else {
+                $user_log("采图失败：" + $syno.explain(result.retval), "danger");
             }
-            $user_log("采图成功", "success");
             if (this.continued) {
                 $procedure.next("begin").exec();
             } else {

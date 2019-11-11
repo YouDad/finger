@@ -50,12 +50,6 @@ async function icc_set_finger_map(finger_map) {
     await $bus.$emit("set_map", finger_map);
 }
 
-async function icc_is_save_image() {
-    let data = {};
-    await $bus.$emit("is_save_image", data);
-    return data.is_save_image;
-}
-
 async function icc_save_png(image) {
     await $bus.$emit("save_png", image);
 }

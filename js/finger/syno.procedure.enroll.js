@@ -18,8 +18,12 @@
                 if (await icc_is_save_image()) {
                     let data_package = (await $syno.request($syno.UpImage))[0];
                     $port.write(data_package);
+                    $procedure.next("show_image");
+                } else {
+                    let data_package = (await $syno.request($syno.GenChar, [this.buffer_id]))[0];
+                    $port.write(data_package);
+                    $procedure.next("search");
                 }
-                $procedure.next("show_image");
             } else {
                 if (result.retval == 0x02) {
                     $procedure.next("begin").exec(`请按第${this.buffer_id}次手指`);
