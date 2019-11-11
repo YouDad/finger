@@ -25,107 +25,100 @@
 
     <script src="../js/functions.js" type="text/javascript"></script>
     <script>
-        $loadjs("js/framework");
-        $loadjs("js/modules");
-        $loadjs("js/connect");
-        $loadjs("js/finger");
-        $loadjs("js/other");
-        let dependencies = [
-            'window.Vue.options["components"]["syno_connect"]',
-            'window.Vue.options["components"]["luwh_header"]',
-            'window.Vue.options["components"]["syno_devinfo"]',
-            'window.Vue.options["components"]["syno_finger"]',
-            'window.Vue.options["components"]["luwh_image"]',
-            'window.Vue.options["components"]["syno_other"]',
-        ];
+        let dependencies = ['window.$'];
         $wait(dependencies, function () {
-            var vm = new Vue({
-                el: "#vue",
-                data: {
-                    css_div: {
-                        '-webkit-user-select': 'none',
-                        'overflow-x': 'hidden',
-                        'position': 'absolute',
-                        'left': '0',
-                        'top': '0',
-                        'right': '0',
-                        'bottom': '0',
-                    },
-                    css_luwh_notify: {
-                        'pointer-events': 'none',
-                    },
-                    css_luwh_header: {
-                        'position': 'absolute',
-                        'left': '0',
-                        'right': '0',
-                        'top': '0',
-                        'height': '3em',
-                    },
-                    css_content: {
-                        'position': 'absolute',
-                        'overflow': 'auto',
-                        'top': '3em',
-                        'left': '0em',
-                        'right': '0em',
-                        'bottom': '0em',
-                    },
+            $loadjs("js");
+            dependencies = [];
+            generate_dependency($('#vue'), dependencies);
+            $wait(dependencies, function () {
+                var vm = new Vue({
+                    el: "#vue",
+                    data: {
+                        css_div: {
+                            '-webkit-user-select': 'none',
+                            'overflow-x': 'hidden',
+                            'position': 'absolute',
+                            'left': '0',
+                            'top': '0',
+                            'right': '0',
+                            'bottom': '0',
+                        },
+                        css_luwh_notify: {
+                            'pointer-events': 'none',
+                        },
+                        css_luwh_header: {
+                            'position': 'absolute',
+                            'left': '0',
+                            'right': '0',
+                            'top': '0',
+                            'height': '3em',
+                        },
+                        css_content: {
+                            'position': 'absolute',
+                            'overflow': 'auto',
+                            'top': '3em',
+                            'left': '0em',
+                            'right': '0em',
+                            'bottom': '0em',
+                        },
 
 
-                    css_luwh_image: {
-                        'position': 'absolute',
-                        'margin': '2em',
-                        'left': '0em',
-                        'top': '0em',
+                        css_luwh_image: {
+                            'position': 'absolute',
+                            'margin': '2em',
+                            'left': '0em',
+                            'top': '0em',
 
-                        'width': '21em',
-                        'height': '23em',
-                    },
-                    css_syno_connect: {
-                        'position': 'absolute',
-                        'margin': '2em',
-                        'left': '0em',
-                        'top': '24em',
+                            'width': '21em',
+                            'height': '23em',
+                        },
+                        css_syno_connect: {
+                            'position': 'absolute',
+                            'margin': '2em',
+                            'left': '0em',
+                            'top': '24em',
 
-                        'width': '21em',
-                        'height': '21em',
-                    },
-                    css_syno_finger: {
-                        'position': 'absolute',
-                        'margin': '2em',
-                        'left': '23em',
-                        'top': '0em',
-                    },
-                    css_syno_character: {
-                        'position': 'absolute',
-                        'margin': '2em',
-                        'left': '23em',
-                        'top': '11em',
+                            'width': '21em',
+                            'height': '21em',
+                        },
+                        css_syno_finger: {
+                            'position': 'absolute',
+                            'margin': '2em',
+                            'left': '23em',
+                            'top': '0em',
+                        },
+                        css_syno_character: {
+                            'position': 'absolute',
+                            'margin': '2em',
+                            'left': '23em',
+                            'top': '11em',
 
-                        'width': '23em',
-                    },
-                    css_syno_other: {
-                        'position': 'absolute',
-                        'margin': '2em',
-                        'left': '50em',
-                        'top': '0em',
+                            'width': '23em',
+                        },
+                        css_syno_other: {
+                            'position': 'absolute',
+                            'margin': '2em',
+                            'left': '50em',
+                            'top': '0em',
 
-                        'width': '23em',
-                    },
-                    css_syno_devinfo: {
-                        'position': 'absolute',
-                        'margin': '2em',
-                        'left': '52em',
-                        'top': '9.5em',
-                    },
-                    css_luwh_log: {
-                        'position': 'absolute',
-                        'margin': '2em',
-                        'left': '22em',
-                        'top': '27em',
+                            'width': '23em',
+                        },
+                        css_syno_devinfo: {
+                            'position': 'absolute',
+                            'margin': '2em',
+                            'left': '52em',
+                            'top': '9.5em',
+                        },
+                        css_luwh_log: {
+                            'position': 'absolute',
+                            'margin': '2em',
+                            'left': '22em',
+                            'top': '27em',
 
-                        'width': '52em',
+                            'width': '52em',
+                        },
                     },
-                },
+                });
             });
         });
     </script>

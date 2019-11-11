@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "./node_modules/.bin/electron .",
+    "start": "electron .",
     "package": "electron-packager . finger --out packaged --arch=x64 --overwrite --electron-version=6.0.12"
   },
   "keywords": [],
@@ -19,9 +19,5 @@
     "serialport": "^7.1.5",
     "tooltip": "^1.6.1",
     "vue": "^2.6.10"
-  },
-  "devDependencies": {
-    "electron": "6.0.12",
-    "electron-rebuild": "^1.8.6"
   }
 }

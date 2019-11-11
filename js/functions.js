@@ -16,9 +16,28 @@ function $wait(names, func) {
     }, 100);
 }
 
+function generate_dependency(node, dependencies) {
+    if (node !== undefined) {
+        let childs = node.children();
+        if (childs.length > 0) {
+            for (let i = 0; i < childs.length; i++) {
+                generate_dependency($(childs[i]), dependencies);
+            }
+        } else {
+            let nodename = node[0].nodeName.toLowerCase();
+            let prefix = nodename.slice(0, nodename.indexOf('_'));
+            for (let this_prefix of ['gd32', 'syno', 'luwh']) {
+                if (prefix === this_prefix) {
+                    dependencies.push(`window.Vue.options["components"]["${nodename}"]`);
+                    break;
+                }
+            }
+        }
+    }
+}
+
 function $loadjs(path) {
     dfs(path_join(__project, path));
-
     function dfs(path) {
         if (fs.lstatSync(path).isDirectory()) {
             let file = fs.readdirSync(path);
