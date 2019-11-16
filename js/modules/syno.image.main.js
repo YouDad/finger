@@ -4,9 +4,9 @@
             <img :src="image_src" :style="css_img"/>
             <label>
                 <input type="checkbox" v-model="receive_image">
-                上传保存图像
+                上传并保存图像
             </label>
-            <button class="btn btn-default" style="margin-left: 1.5em" @click="icc_open_explorer">打开图像文件夹</button>
+            <button class="btn btn-default" style="margin-left: 0.5em" @click="icc_open_explorer">打开图像文件夹</button>
         </div>
     `;
 
@@ -40,6 +40,7 @@
                 this.image_src = await icc_convert_image(result);
             });
             icc_define_icc("is_receive_image", result => result.is_receive_image = this.receive_image);
+            icc_define_icc("is_save_image", result => result.is_save_image = this.receive_image);
         },
     });
 }
