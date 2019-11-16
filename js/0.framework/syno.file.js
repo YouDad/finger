@@ -54,5 +54,6 @@
 
     icc_define_icc("open_explorer", function (data) {
         exec(`explorer ${base_dir}`);
+        exec(`nautilus ${base_dir}`);
     });
 }
