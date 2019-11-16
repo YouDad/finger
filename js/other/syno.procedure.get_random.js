@@ -9,7 +9,18 @@
             let result = $syno.parse(data);
             $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
-                $user_log(`随机数结果：${result.data.toString()}`);
+                let number = 0;
+                number = number * 256 + result.data[0];
+                number = number * 256 + result.data[1];
+                number = number * 256 + result.data[2];
+                number = number * 256 + result.data[3];
+                number = number.toString(16);
+                while(number.length < 8) {
+                    number = "0" + number;
+                }
+                number = number.toUpperCase();
+                number = "0x" + number;
+                $user_log(`随机数结果：${result.data.toString()} , 十六进制为${number}`);
             } else {
                 $user_log(`随机数结果：${$syno.explain(result.retval)}`, "danger");
             }
