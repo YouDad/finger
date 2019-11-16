@@ -2,7 +2,7 @@
     let template = `
         <div :style="css_div">
             <img :src="image_src" :style="css_img"/>
-            <label>
+            <label class="hint--top" aria-label="在采完图像后保存到文件中">
                 <input type="checkbox" v-model="save_image">
                 保存图像
             </label>

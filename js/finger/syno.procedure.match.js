@@ -23,8 +23,10 @@
             let result = $syno.parse(data);
             $log($syno.explain(result.retval));
             if (result.retval == 0x00) {
-                let data_package = (await $syno.request($syno.GetImage))[0];
-                $port.write(data_package);
+                if (!(await icc_is_from_file())) {
+                    let data_package = (await $syno.request($syno.GetImage))[0];
+                    $port.write(data_package);
+                }
                 $procedure.next("up_image");
             } else {
                 $procedure.next("end").exec("载入特征失败");
@@ -44,8 +46,10 @@
                     $procedure.next("match");
                 }
             } else {
-                let data_package = (await $syno.request($syno.GetImage))[0];
-                $port.write(data_package);
+                if (!(await icc_is_from_file())) {
+                    let data_package = (await $syno.request($syno.GetImage))[0];
+                    $port.write(data_package);
+                }
                 $procedure.next("up_image");
                 if (result.retval === 0x02) {
                     $user_log("请按手指", "warning");

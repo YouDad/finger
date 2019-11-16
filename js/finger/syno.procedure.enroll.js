@@ -2,8 +2,10 @@
     let procedures = {
         buffer_id: 1,
         "begin": async function (message) {
-            let data_package = (await $syno.request($syno.GetEnrollImage))[0];
-            $port.write(data_package);
+            if (!(await icc_is_from_file())) {
+                let data_package = (await $syno.request($syno.GetEnrollImage))[0];
+                $port.write(data_package);
+            }
             $procedure.next("process_enroll_image");
             if (message) {
                 $user_log(message, "warning");
@@ -59,7 +61,7 @@
                 $port.write(data_package);
                 $procedure.next("process_search");
             } else {
-                $procedure.next("begin").exec("生成特征失败");
+                $procedure.next("begin").exec("生成特征失败，重新开始注册");
                 return;
             }
         },

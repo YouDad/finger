@@ -10,8 +10,10 @@
             if (message === true) {
                 this.continued = true;
             }
-            let data_package = (await $syno.request($syno.GetImage))[0];
-            $port.write(data_package);
+            if (!(await icc_is_from_file())) {
+                let data_package = (await $syno.request($syno.GetImage))[0];
+                $port.write(data_package);
+            }
             $procedure.next("up_image");
             if (typeof (message) !== "boolean") {
                 $user_log(message, "warning");

@@ -82,3 +82,9 @@ async function icc_set_notepad_progress(progress) {
 async function icc_set_notepad(notepad) {
     await $bus.$emit("notepad", notepad);
 }
+
+async function icc_is_from_file() {
+    let is = {};
+    await $bus.$emit("is_from_file", is);
+    return is.is_from_file;
+}
