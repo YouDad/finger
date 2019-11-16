@@ -16,7 +16,7 @@ window.$procedure = {
             $log(`load procedure ${name} failed. because no start_step:${start_step}.`, "danger");
             return;
         }
-        if (this.hasOwnProperty("clean")) {
+        if (this.now_procedure && this.now_procedure.hasOwnProperty("clean")) {
             this.now_procedure["clean"]();
         }
 
