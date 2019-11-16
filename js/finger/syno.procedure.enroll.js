@@ -15,7 +15,7 @@
             if (result.retval == 0x00) {
                 $user_log("请抬起手指");
 
-                if (await icc_is_save_image()) {
+                if (await icc_is_receive_image()) {
                     let data_package = (await $syno.request($syno.UpImage))[0];
                     $port.write(data_package);
                     $procedure.next("show_image");

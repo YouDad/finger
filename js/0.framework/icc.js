@@ -14,6 +14,12 @@ async function $log(message, type = "info") {
     await $bus.$emit("log", { message, type, level: 2, });
 }
 
+async function icc_is_receive_image() {
+    let data = {};
+    await $bus.$emit("is_receive_image", data);
+    return data.is_receive_image;
+}
+
 async function icc_is_save_image() {
     let data = {};
     await $bus.$emit("is_save_image", data);
