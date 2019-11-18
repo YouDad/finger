@@ -1,6 +1,6 @@
 {
     window.$syno = {
-        _package_header_length: 12,
+        _package_other_length: 9 + 2,
         request: async function (code, param = [], data = []) {
             address = await icc_get_address();
 
@@ -24,8 +24,8 @@
             if (data instanceof Array) {
                 //get size
                 let ret = [];
-                let size = 256;
-                size -= this._package_header_length;
+                let size = 139;
+                size -= this._package_other_length;
                 for (let i = 0; i < data.length / size; i++) {
                     ret.push(data.slice(i * size, i * size + size));
                 }
