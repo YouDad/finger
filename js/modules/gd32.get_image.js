@@ -21,7 +21,9 @@
                 icc_show_image(result);
                 $user_log("采图成功", "success");
             } else {
-                $user_log("采图超时", "danger");
+                if (!this.continued) {
+                    $user_log("采图超时", "danger");
+                }
             }
             if (this.continued) {
                 $procedure.next("begin").exec();
