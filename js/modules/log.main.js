@@ -10,19 +10,19 @@
             <ul class="list-group" :style="css_list_limited" v-show="log_type==0">
                     <li class="list-group-item" :class="log.type" v-for="(log, index) in user_logs">
                         {{log.message}}
-                        <span :key="log.message+index" class="badge">{{now}} {{log.number}}</span>
+                        <span :key="log.message+index" class="badge">{{log.time}} {{log.number}}</span>
                     </li>
             </ul>
             <ul class="list-group" :style="css_list_limited" v-show="log_type==1">
                     <li class="list-group-item" :class="log.type" v-for="(log, index) in test_logs">
                         {{log.message}}
-                        <span :key="log.message+index" class="badge">{{now}} {{log.number}}</span>
+                        <span :key="log.message+index" class="badge">{{log.time}} {{log.number}}</span>
                     </li>
             </ul>
             <ul class="list-group" :style="css_list_limited" v-show="log_type==2">
                     <li class="list-group-item" :class="log.type" v-for="(log, index) in deve_logs">
                         {{log.message}}
-                        <span :key="log.message+index" class="badge">{{now}} {{log.number}}</span>
+                        <span :key="log.message+index" class="badge">{{log.time}} {{log.number}}</span>
                     </li>
             </ul>
         </div>
@@ -52,12 +52,6 @@
         }
     };
 
-    let computed = {
-        now: () => {
-            return (new Date()).toString().split(" ")[4];
-        },
-    };
-
     let methods = {
         clear: function () {
             this.user_logs = [];
@@ -69,7 +63,6 @@
     Vue.component('luwh_log', {
         template: template,
         data: data_css,
-        computed: computed,
         methods: methods,
         created: function () {
             let that = this;
@@ -98,6 +91,7 @@
                         logs[logs.length - 1].number++;
                     } else {
                         log.number = 1;
+                        log.time = (new Date()).toString().split(" ")[4];
                         logs.push(log);
                     }
                 }
