@@ -1,6 +1,9 @@
 {
     let procedures = {
         data: 0,
+        "clean": async function () {
+            this.data = 0;
+        },
         "begin": async function (leds) {
             this.data = 15 - (leds[0] * 1 + leds[1] * 2 + leds[2] * 4 + leds[3] * 8);
             let data_package = (await $syno.request($syno.ControlLED, [this.data]))[0];

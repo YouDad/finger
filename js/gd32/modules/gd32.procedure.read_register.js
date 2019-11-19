@@ -1,5 +1,6 @@
 {
     let procedures = {
+        "clean": async function () { },
         "begin": async function (address) {
             let data_package = (await $gd32.request($gd32.ReadRegister, [address]))[0];
             $port.write(data_package);

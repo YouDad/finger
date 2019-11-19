@@ -1,6 +1,9 @@
 {
     let procedures = {
         interval_id: 0,
+        "clean": async function () {
+            this.interval_id = 0;
+        },
         "begin": async function () {
             password = await icc_get_password();
 

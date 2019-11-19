@@ -1,6 +1,9 @@
 {
     let procedures = {
         finger_id: 0,
+        "clean": async function () {
+            this.finger_id = 0;
+        },
         "begin": async function (charBuffer) {
             this.finger_id = await icc_get_finger_id();
             let data_packages = await $syno.request($syno.DownChar, [1], charBuffer);

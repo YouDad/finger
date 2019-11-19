@@ -1,6 +1,9 @@
 {
     let procedures = {
         buffer_id: 1,
+        "clean": async function () {
+            this.buffer_id = 1;
+        },
         "begin": async function (message) {
             if (!(await icc_is_from_file())) {
                 let data_package = (await $syno.request($syno.GetEnrollImage))[0];

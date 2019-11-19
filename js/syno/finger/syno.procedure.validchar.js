@@ -2,6 +2,10 @@
     let procedures = {
         dbsize: 0,
         next: 0,
+        "clean": async function () {
+            this.dbsize = 0;
+            this.next = 0;
+        },
         "begin": async function () {
             this.dbsize = await icc_get_dbsize();
             this.next = 0;

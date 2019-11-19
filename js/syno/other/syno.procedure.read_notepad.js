@@ -1,6 +1,9 @@
 {
     let procedures = {
         data: [],
+        "clean": async function () {
+            this.data = [];
+        },
         "begin": async function () {
             let data_package = (await $syno.request($syno.ReadNotepad, [this.data.length / 32]))[0];
             $port.write(data_package);

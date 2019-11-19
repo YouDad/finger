@@ -1,5 +1,6 @@
 {
     let procedures = {
+        "clean": async function () { },
         "begin": async function () {
             let data_package = (await $syno.request($syno.GetRandomCode))[0];
             $port.write(data_package);

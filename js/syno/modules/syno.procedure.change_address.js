@@ -1,6 +1,9 @@
 {
     let procedures = {
         data: "",
+        "clean": async function () {
+            this.data = "";
+        },
         "begin": async function (data) {
             this.data = data;
             let addr = data.use;

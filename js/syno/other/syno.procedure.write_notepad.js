@@ -1,6 +1,9 @@
 {
     let procedures = {
         data: [],
+        "clean": async function () {
+            this.data = [];
+        },
         "begin": async function (text) {
             this.data = text === undefined ? this.data : text.slice(0, text.length);
             let datas = [16 - this.data.length / 32].concat(this.data.splice(0, 32));
