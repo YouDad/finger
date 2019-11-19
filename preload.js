@@ -18,3 +18,8 @@ window.addEventListener('DOMContentLoaded', () => {
 	window.jQuery = window.$;
 	require("bootstrap");
 });
+
+window.config = {
+    bmp: true,
+    png: false,
+};

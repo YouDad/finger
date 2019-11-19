@@ -52,6 +52,25 @@
         }
     });
 
+    icc_define_icc("save_bmp", function (buffer) {
+        let fd;
+        try {
+            let bmp_header = path_join(__project, "css", "bmp_header.160x160");
+            let filename = path_join(image_dir, get_filename() + ".bmp");
+            fs.copyFileSync(bmp_header, filename);
+            fd = fs.openSync(filename, "a");
+            fs.writeSync(fd, buffer);
+            $user_log(`${filename} 保存成功`);
+        } catch (err) {
+            console.error(err);
+        } finally {
+            if (fd === undefined) {
+                return;
+            }
+            fs.closeSync(fd);
+        }
+    });
+
     icc_define_icc("open_explorer", function (data) {
         exec(`explorer ${base_dir}`);
         exec(`nautilus ${base_dir}`);
