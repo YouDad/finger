@@ -107,22 +107,38 @@
                 $('#downimage_file_selector').trigger('click');
             } else {
                 let path = $(e.target)[0].files[0].path;
-                $(e.target)[0].path = "";
+                $(e.target).val("");
                 $user_log(`Down Image:${path}`);
-                const buffer = $Buffer.allocUnsafe(65536);
-
-                let image = await $canvas.loadImage(path);
-                let ctx = $canvas.createCanvas(160, 160).getContext('2d');
-                ctx.drawImage(image, 0, 0);
-                let data = ctx.getImageData(0, 0, 160, 160);
-
                 let param = [];
-                for (let i = 0; i < data.data.length; i+=8) {
-                    let high = data.data[i] % 16;
-                    let low = data.data[i + 4] % 16;
 
-                    param.push(high * 16 + low);
+                switch (path.slice(path.lastIndexOf("."))) {
+                    case ".bmp":
+                const buffer = $Buffer.allocUnsafe(65536);
+                        let fd = fs.openSync(path, "r");
+                        let bytesRead = fs.readSync(fd, buffer, 0, buffer.length, 1078);
+                        fs.closeSync(fd);
+                        for (let i = 0; i < bytesRead; i+=2) {
+                            let high = buffer[i] / 16;
+                            let low = buffer[i + 1] / 16;
+                            param.push(high * 16 + low);
+                        }
+                        break;
+                    case ".png":
+                        let image = await $canvas.loadImage(path);
+                        let ctx = $canvas.createCanvas(160, 160).getContext('2d');
+                        ctx.drawImage(image, 0, 0);
+                        let data = ctx.getImageData(0, 0, 160, 160).data;
+                        for (let i = 0; i < data.length; i+=8) {
+                            let high = data[i] / 16;
+                            let low = data[i + 4] / 16;
+                            param.push(high * 16 + low);
+                        }
+                        break;
+                    default:
+                        $user_log("下载图片失败，图片格式不支持");
+                        return;
                 }
+
 
                 let data_packages = await $syno.request($syno.DownImage, undefined, param);
                 for (data_package of data_packages) {
