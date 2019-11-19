@@ -84,17 +84,6 @@
                 'cursor': i == this.cursor,
             };
         },
-        range: function (start, end) {
-            if (end === undefined) {
-                end = start;
-                start = 0;
-            }
-            let ret = [];
-            for (let i = start; i < end; i++) {
-                ret.push(i);
-            }
-            return ret;
-        },
         mousedown: function (down, ev) {
             this.down = down;
             ev = (ev.which == 3);

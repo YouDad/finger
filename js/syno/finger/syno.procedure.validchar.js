@@ -39,7 +39,7 @@
                 }
 
                 bool_list = [];
-                for (const i in window.range(this.dbsize)) {
+                for (let i = 0; i < this.dbsize; i++) {
                     if (list.length && list[0] == i) {
                         list.shift();
                         bool_list.push(1);
