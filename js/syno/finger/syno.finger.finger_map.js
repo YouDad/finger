@@ -45,7 +45,7 @@
                 'margin-bottom': '0.5em',
                 'margin-left': '12.6em',
             },
-            items: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
+            items: [],
             NowPage: 0,
         }
     };
@@ -104,6 +104,10 @@
         template, computed, methods,
         data: data_css,
         created: function () {
+            this.items = [];
+            for (let i = 0; i < 64; i++) {
+                this.items.push(0);
+            }
         },
         mounted: function () {
             let that = this;
