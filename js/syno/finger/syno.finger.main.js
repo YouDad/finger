@@ -113,14 +113,16 @@
 
                 switch (path.slice(path.lastIndexOf("."))) {
                     case ".bmp":
-                const buffer = $Buffer.allocUnsafe(65536);
+                        const buffer = $Buffer.allocUnsafe(65536);
                         let fd = fs.openSync(path, "r");
                         let bytesRead = fs.readSync(fd, buffer, 0, buffer.length, 1078);
                         fs.closeSync(fd);
-                        for (let i = 0; i < bytesRead; i+=2) {
-                            let high = buffer[i] / 16;
-                            let low = buffer[i + 1] / 16;
-                            param.push(high * 16 + low);
+                        for (let i = 0; i < 160; i++) {
+                            for (let j = 0; j < bytesRead / 160; j+=2) {
+                                let high = buffer[i * 160 + j] / 16;
+                                let low = buffer[i * 160 + j + 1] / 16;
+                                param.push(high * 16 + low);
+                            }
                         }
                         break;
                     case ".png":
