@@ -117,7 +117,7 @@
                         let fd = fs.openSync(path, "r");
                         let bytesRead = fs.readSync(fd, buffer, 0, buffer.length, 1078);
                         fs.closeSync(fd);
-                        for (let i = 0; i < 160; i++) {
+                        for (let i = 160 - 1; i >= 0; i--) {
                             for (let j = 0; j < bytesRead / 160; j+=2) {
                                 let high = buffer[i * 160 + j] / 16;
                                 let low = buffer[i * 160 + j + 1] / 16;
