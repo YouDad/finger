@@ -146,6 +146,8 @@
                 for (data_package of data_packages) {
                     $port.write(data_package);
                 }
+
+                clearInterval(window.from_file);
             }
         }
     };
