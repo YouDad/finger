@@ -94,8 +94,10 @@ async function icc_set_notepad(notepad) {
 async function icc_is_from_file() {
     let is = {};
     await $bus.$emit("is_from_file", is);
-    window.from_file = setInterval(async () => {
-        $user_log("请下载图像文件代替按手指", "warning");
-    }, 1200);
+    if (is.is_from_file) {
+        window.from_file = setInterval(async () => {
+            $user_log("请下载图像文件代替按手指", "warning");
+        }, 1200);
+    }
     return is.is_from_file;
 }
